@@ -1,0 +1,36 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Marshall@Home</title>
+    <meta name="description" content="Niama">
+    <meta name="author" content="kimak">
+
+    <link rel="stylesheet" href="css/styles.css?v=1.0">
+    <script type="text/javascript" src="scripts/quiz.js"></script>
+
+    <script src="jquery-3.5.1.min.js"></script>
+
+
+</head>
+
+<body onload="getData()">
+    <h1>Something.</h1>
+    <h2>Question number</h2>
+    <h3 id="qnText">replace this with the question</h3>
+    <div>
+        <button onclick="select('1')" class="answer"></button>
+
+        <button onclick="select('2')" class="answer"></button>
+
+        <button onclick="select('3')" class="answer"></button>
+
+        <button onclick="select('4')" class="answer"></button>
+    </div>
+    <button id="selectAns" onclick="lockQuestion()">select answer</button>
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+{
+    "Questions": [
+        {
+            "QnsType": "1",
+            "Question": "how much something can something",
+            "Answers": ["one","tw","th","f"],
+            "Correct": 3
+        },
+
+        {
+            "QnsType": "1",
+            "Question": "how much something can something"
+        },
+
+        {
+            "QnsType": "1",
+            "Question": "how much something can something"
+        }
+    ]
+}

@@ -8,8 +8,9 @@
         },
 
         {
-            "QnsType": "1",
-            "Question": "how much something can something"
+            "QnsType": "2",
+            "Question": "type in 'bruh'",
+            "AcceptedAns" : ["bruh", "BRUH", "bra"]
         },
 
         {

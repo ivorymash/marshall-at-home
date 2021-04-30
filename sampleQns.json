@@ -15,7 +15,10 @@
 
         {
             "QnsType": "1",
-            "Question": "how much something can something"
+            "Question": "how much something can something",
+            "QnImage" : "https://pbs.twimg.com/media/E0Iy8LFUYAAi7EZ?format=jpg&name=large",
+            "Answers": ["one","tw","th","f"],
+            "Correct": 3
         }
     ]
 }

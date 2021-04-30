@@ -22,7 +22,7 @@ function getData() {
             return response.json();
         })
         .then(function (myJson) {
-            loadQuestion(myJson["Questions"][1])
+            loadQuestion(myJson["Questions"][2])
         });
 }
 useEffect(() => {
@@ -56,6 +56,13 @@ function loadQnType1(data) {
 
     var qnType1 = `<h3 id="qnText">${data.Question}</h3>
     <div>`
+
+    //check if there is an image appended.
+    if(data.QnImage){
+        console.log("image found. retrieving image");
+        qnType1 += `<img src="${data.QnImage}">`
+    }
+
     for (i = 0; i < data.Answers.length; i++) {
         qnType1 += `<button onclick="select('${i + 1}')" class="answer">${data.Answers[i]}</button>`
     }

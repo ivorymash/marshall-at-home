@@ -1,7 +1,9 @@
 var json = require('sampleQns.json');
-var qnType = "";
-var selectedAns = ""; //catch all variable for the answer picked/typed/whatever.
-var correctAns = "";
+var qnType;
+var selectedAns; //catch all variable for the answer picked/typed/whatever.
+var correctAns;
+var currQn;
+var qnJson;
 
 function stuff() {
     $.getJSON("sampleQns.json"), function (data) {
@@ -18,21 +20,29 @@ function getData() {
             }
         }
     )
-        .then(function (response) {
-            return response.json();
+        .then(data => { return data.json(); })
+        .then(res => {
+            qnJson = res["Questions"];
+            currQn = 0;
+            loadQuestion(qnJson[currQn]);
         })
-        .then(function (myJson) {
-            loadQuestion(myJson["Questions"][2])
-        });
+        .catch(error => { alert(error) });
 }
-useEffect(() => {
-    getData()
-}, [])
+
+function loadNext() {
+    console.log("loading next qn...");
+    currQn++
+    loadQuestion(qnJson[currQn])
+}
 
 
 function loadQuestion(data) {
     //TODO: add support for question types
-    //TODO: spawn buttons based on how many answeres there are.
+
+    //empty out the question body div to allow the next question to be loaded in.
+
+    $("#qnBody").empty(); //we should probably convert this page to use jquery tbh
+
     switch (data.QnsType) { //TODO: add the other question types here
         case "1":
             loadQnType1(data);
@@ -58,7 +68,7 @@ function loadQnType1(data) {
     <div>`
 
     //check if there is an image appended.
-    if(data.QnImage){
+    if (data.QnImage) {
         console.log("image found. retrieving image");
         qnType1 += `<img src="${data.QnImage}">`
     }
@@ -78,13 +88,15 @@ function loadQnType2(data) {
 
     correctAns = data.AcceptedAns; //store the correct answer
 
-    console.log(correctAns);
 
     console.log("loading qn type 2")
     var qnType2 = `<h3 id="qnText">${data.Question}</h3>
-    <div>
-    <input type="text" id="selectedAns" name="answerField"><br>
-
+    <div>`
+    if (data.QnImage) {
+        console.log("image found. retrieving image");
+        qnType2 += `<img src="${data.QnImage}">`;
+    }
+    qnType2 += `<input type="text" id="selectedAns" name="answerField"><br>
   </form></div>`
 
 

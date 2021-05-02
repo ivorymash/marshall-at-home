@@ -5,10 +5,41 @@ const app = express(); // DO NOT DELETE
 const bodyParser = require('body-parser');
 const Database = require('./database');
 const db = new Database();
+const dotenv = require('dotenv');
+
+//password encryption
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
-// const myPlaintextPassword = 's0/\/\P4$$w0rD';
-// const someOtherPlaintextPassword = 'not_bacon';
+
+//jwt functionality
+
+const jwt = require('jsonwebtoken');
+
+// get config vars
+dotenv.config();
+
+// access config var
+
+
+//middleware jwt authentication
+function authenticateToken(req, res, next) {
+    const authHeader = req.headers['authorization']
+    const token = authHeader && authHeader.split(' ')[1]
+
+    if (token == null) return res.sendStatus(401)
+
+    jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
+        console.log(err)
+
+        if (err) return res.sendStatus(403)
+
+        req.user = user
+        console.log("Authorized JWT token");
+        next()
+    })
+}
+
+
 app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json());
@@ -32,8 +63,8 @@ app.use(express.json());
 
 
 
- //test api
-app.get("/user", (req, res) => {
+//test api
+app.get("/user", authenticateToken, (req, res) => {
     const username = req.body.username;
     const password = req.body.password
 
@@ -45,10 +76,10 @@ app.get("/user", (req, res) => {
         } else {
             var pass = result.results[0].password; //this is janky, there has to be a better way.
 
-            bcrypt.compare(password, pass, function(err, result) {
-                if(result ==true){
+            bcrypt.compare(password, pass, function (err, result) {
+                if (result == true) {
                     console.log("password is correct");
-                }else{
+                } else {
                     console.log("bruh");
                 }
             });
@@ -59,30 +90,46 @@ app.get("/user", (req, res) => {
 
 })
 
+
+function generateAccessToken(username) {
+    //this token doesnt expire.
+    return jwt.sign(username, process.env.TOKEN_SECRET);
+}
+
+//test token api
+app.get("/token", (req, res) => {
+    const username = req.body.username;
+
+    var jwt = generateAccessToken(username);
+    console.log(jwt);
+    return res.send(200);
+
+})
+
 //create user api
 app.post("/user", (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
     console.log(username, password);
     //do some filtering and testing here
-    if(username == null || password == null){
+    if (username == null || password == null) {
         return res.sendStatus(412);
     }
-        //bcrypt
-        bcrypt.hash(password, saltRounds, function (err, hash) {
-            if (err) {return res.sendStatus(500)};
+    //bcrypt
+    bcrypt.hash(password, saltRounds, function (err, hash) {
+        if (err) { return res.sendStatus(500) };
 
-            db.CreateUser(username, hash, (result) => {
-                if (result.err != null) {
-                    console.log(result.err);
-                    return res.sendStatus(500);
-                } else {
-                    console.log(result);
-                    return res.sendStatus(201);
-                }
-            });
-
+        db.CreateUser(username, hash, (result) => {
+            if (result.err != null) {
+                console.log(result.err);
+                return res.sendStatus(500);
+            } else {
+                console.log(result);
+                return res.sendStatus(201);
+            }
         });
+
+    });
 
 })
 

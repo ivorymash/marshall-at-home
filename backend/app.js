@@ -64,9 +64,11 @@ app.use(express.json());
 
 
 //test api
-app.get("/user", authenticateToken, (req, res) => {
+app.post("/user", (req, res) => {
     const username = req.body.username;
-    const password = req.body.password
+    const password = req.body.password;
+    
+    console.log(username,password);
 
     db.GetUser(username, (result) => {
         // console.log(result);
@@ -74,6 +76,7 @@ app.get("/user", authenticateToken, (req, res) => {
             console.log(result.err);
             return res.sendStatus(500);
         } else {
+            console.log(result);
             var pass = result.results[0].password; //this is janky, there has to be a better way.
 
             bcrypt.compare(password, pass, function (err, result) {

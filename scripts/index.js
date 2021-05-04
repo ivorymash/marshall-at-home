@@ -1,11 +1,11 @@
 
 function signInMessage() {
     // document.cookie = "user=Yourmother";
-    var signedIn = (document.cookie.match(/^(?:.*;)?\s*user\s*=\s*([^;]+)(?:.*)?$/)||[,null])[1];
+    console.log("doing this");
+    var signedIn = window.sessionStorage.getItem('user');
     //signedIn returns either the value of the cookie or null, depending on if the cookie exists.
     var signInMsg = "Signed in as "
     if (signedIn == null) {
-        alert("Not signed in");
         signInMsg += "Guest";
         loginBtn(false);
     } else {
@@ -15,6 +15,7 @@ function signInMessage() {
 
     document.getElementById("signInBanner").innerHTML = signInMsg
 }
+
 
 function loginBtn(isLoggedIn){
 
@@ -29,3 +30,8 @@ function loginBtn(isLoggedIn){
     }
 }
 
+function logOut(){
+    window.localStorage.removeItem('token');
+    window.sessionStorage.removeItem('token');
+    window.location.replace("login.html");
+}

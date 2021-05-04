@@ -63,40 +63,54 @@ app.use(express.json());
 
 
 
-//test api
+//login api
 app.post("/user", (req, res) => {
-    const username = req.body.username;
-    const password = req.body.password;
 
-    console.log(username,password);
+    try {
+        const username = req.body.username;
+        const password = req.body.password;
 
-    db.GetUser(username, (result) => {
-        // console.log(result);
-        if (result.err != null) {
-            console.log(result.err);
-            return res.sendStatus(500);
-        } else {
-            console.log(result);
-            var pass = result.results[0].password; //this is janky, there has to be a better way.
-
-            bcrypt.compare(password, pass, function (err, result) {
-                if (result == true) {
-                    console.log("password is correct");
-                } else {
-                    console.log("bruh");
-                }
-            });
-
-            return res.sendStatus(201);
+        if(!username || !password){
+            return res.sendStatus(400);
         }
-    })
 
+        console.log(username, password);
+
+        db.GetUser(username, (result) => {
+            // console.log(result);
+            if (result.err != null) {
+                console.log(result.err);
+                return res.sendStatus(500);
+            } else {
+                console.log(result);
+                var pass = result.results[0].password; //this is janky, there has to be a better way.
+
+                bcrypt.compare(password, pass, function (err, result) {
+                    if (result == true) {
+                        console.log("password is correct");
+                        generateAccessToken(username)
+                            .then((token) => {
+                                return res.status(202).send({ 'token': token }); //if the js sees the 202 status, keep the name in session storagee
+                            })
+                    } else {
+                        console.log("bruh");
+                        return res.sendStatus(401);
+                    }
+                });
+
+            }
+        })
+    } catch (error) {
+        res.status(500).send({ 'error': error, 'code': 'UNEXPECTED_ERROR' })
+
+    }
 })
 
 
-function generateAccessToken(username) {
+async function generateAccessToken(username) {
     //this token doesnt expire.
-    return jwt.sign(username, process.env.TOKEN_SECRET);
+    const token = await jwt.sign(username, process.env.TOKEN_SECRET);
+    return token
 }
 
 //test token api

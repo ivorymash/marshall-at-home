@@ -67,7 +67,7 @@ app.use(express.json());
 app.post("/user", (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
-    
+
     console.log(username,password);
 
     db.GetUser(username, (result) => {

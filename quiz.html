@@ -25,12 +25,15 @@
 
 </head>
 
-<body onload="signInLogic()">
+<body onload="getData()">
     <h1>Something.</h1>
     <h2>Question number</h2>
     <div id="qnBody">
 
     </div>
+    <script>
+        signInLogic();
+    </script>
     <button id="selectAns" onclick="lockQuestion()">select answer</button>
     <button id="testNext" onclick="loadNext()">Load Next</button>
 </body>

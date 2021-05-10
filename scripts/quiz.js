@@ -117,6 +117,10 @@ function lockQuestion() {
 
     //read the current question type, then pass judgement.
 
+    if(selectedAns == null || selectedAns == ""){
+        alert("nothing here cb"); //replace with error handling
+        return;
+    }
     switch (qnType) {
         case "1":
             verifyQnType1();
@@ -137,6 +141,8 @@ function verifyQnType1() {
     } else {
         alert("wrong");
     }
+    currQn++;
+    loadQuestion(qnJson[currQn]);
 }
 
 function verifyQnType2() {
@@ -149,4 +155,6 @@ function verifyQnType2() {
     }
 
     isCorrect ? alert("right") : alert("wrong")
+    currQn++;
+    loadQuestion(qnJson[currQn]);
 }

@@ -1,19 +1,38 @@
 <!doctype html>
 
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
+    <meta charset="utf-8">
 
-  <title>Marshall@Home</title>
-  <meta name="description" content="Niama">
-  <meta name="author" content="kimak">
+    <title>Marshall@Home</title>
+    <meta name="description" content="Niama">
+    <meta name="author" content="kimak">
 
-  <link rel="stylesheet" href="css/styles.css?v=1.0">
+    <link rel="stylesheet" href="css/styles.css?v=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/reefjs@8/dist/reef.min.js"></script>
+    <script src="/scripts/index.js"></script>
+    
+    <script src="/scripts/signinlogic.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </head>
 
-<body>
+<body onload="signInLogic()">
+    <h1 id="signInBanner"></h1>
+    <div id="logInOutDiv">
+        <button id="logInOrOut">Log In</button>
+    </div>
     <h1>Something will eventually be here.</h1>
-    <a href="http://127.0.0.1:5500/marshall-at-home/quiz.html">quiz</a>
+    <a href="http://127.0.0.1:5500/quiz.html">quiz</a>
+    <div id="app"></div>
+
+
+
+    <script src="test.js"></script>
+    <script>
+        signInMessage();
+    </script>
 </body>
+
 </html>

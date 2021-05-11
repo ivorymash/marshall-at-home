@@ -1,6 +1,7 @@
 var qnType;
 var selectedAns; //catch all variable for the answer picked/typed/whatever.
 var correctAns;
+var correctTally = 0;
 var currQn;
 var qnJson;
 var questionsAnsweredTrack = new Array; 
@@ -50,33 +51,32 @@ function updateQuestionTrack() {
     document.getElementById("checkmark").innerHTML = questionsAnsweredTrack;
 
 }
+
 function loadQuestion(data) {
 
     //empty out the question body div to allow the next question to be loaded in.
 
     if (currQn == qnJson.length) { //all questions done
-        alert("No more qns");
-        window.location.replace("index.html");
-    }
+        submitResults();
+    }else{
+        updateQuestionTrack();
 
-    updateQuestionTrack();
-
-    console.log(data.question);
-
-    $("#qnBody").empty(); //we should probably convert this page to use jquery tbh
-
-    switch (data.question.QnsType) { //TODO: add the other question types here
-        case "1":
-            loadQnType1(data);
-            break;
-
-        case "2":
-            loadQnType2(data);
-            break;
-
-        default:
-            break;
-
+        $("#qnBody").empty(); //we should probably convert this page to use jquery tbh
+    
+        switch (data.question.QnsType) { //TODO: add the other question types here
+            case "1":
+                loadQnType1(data);
+                break;
+    
+            case "2":
+                loadQnType2(data);
+                break;
+    
+            default:
+                break;
+    
+        }
+    
     }
 
 }
@@ -162,6 +162,7 @@ function verifyQnType1() {
     if (selectedAns == correctAns) {
         alert("right");
         questionsAnsweredTrack[currQn] = "O "
+        correctTally++;
     } else {
         alert("wrong");
         questionsAnsweredTrack[currQn] = "X "
@@ -188,10 +189,38 @@ function verifyQnType2() {
     if (isCorrect) {
         alert("right");
         questionsAnsweredTrack[currQn] = "O "
+        correctTally++;
     }else {
         alert("wrong");
         questionsAnsweredTrack[currQn] = "X "
     }
     currQn++;
     loadQuestion(qnJson[currQn]);
+}
+
+function submitResults(){
+
+    userid = window.localStorage.getItem("id");
+    if(userid == null) {
+        userid = window.sessionStorage.getItem("id");
+    }
+
+    console.log(correctTally);
+
+    fetch('http://localhost:3000/quiz/submit'
+        , {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            method: "POST",
+            body: JSON.stringify({ userid: userid, totalQuestions : qnJson.length, correctQuestions : correctTally})
+        }
+    )
+        .then(res => {
+            console.log(res);
+            console.log("done submitting!");
+            window.location.replace("profile.html");
+        })
+        .catch(error => { alert(error) });
 }

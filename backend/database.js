@@ -38,7 +38,7 @@ class Database {
     }
 
     
-    postQuizResult(userid, callback) {
+    postQuizResult(userid,totalQuestions,correctQuestions, callback) {
         this.pool
         .query(`INSERT into quiz_history(user_id,total_questions,correct_questions,time_of_quiz) values($1, $2, $3, current_timestamp);`, [userid,totalQuestions,correctQuestions], (err,res) => {
             if(err){return callback({'error':err,'results':null})}

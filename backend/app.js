@@ -187,27 +187,29 @@ app.get("/questions", (req,res) => { //get a bunch of questions
 
 })
 
-app.post("/quiz/submit", (req,res) => { //get quiz history
+app.post("/quiz/submit", (req,res) => { //submit quiz results
     const userid = req.body.userid;
     const totalQuestions = req.body.totalQuestions;
     const correctQuestions = req.body.correctQuestions;
 
     db.postQuizResult(userid,totalQuestions,correctQuestions, (result) => {
-
+        console.log(result);
+        return res.sendStatus(200);
     })
+    
 })
 
-app.post('/reset', (req, res) => {
-    db.resetTables((result) => {
-        console.log('result' + result.err);
-        if (result.err != null) {
-            return res.sendStatus(500);
-        } else {
-            console.log(result);
-            return res.sendStatus(200);
-        }
-    }) //reset it
-})
+// app.post('/reset', (req, res) => {
+//     db.resetTables((result) => {
+//         console.log('result' + result.err);
+//         if (result.err != null) {
+//             return res.sendStatus(500);
+//         } else {
+//             console.log(result);
+//             return res.sendStatus(200);
+//         }
+//     }) //reset it
+// })
 
 /**
  * ========================== COMPANY =========================

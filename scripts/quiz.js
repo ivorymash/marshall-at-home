@@ -1,4 +1,3 @@
-var json = require('sampleQns.json');
 var qnType;
 var selectedAns; //catch all variable for the answer picked/typed/whatever.
 var correctAns;
@@ -12,7 +11,7 @@ function stuff() {
 }
 
 function getData() {
-    fetch('sampleQns.json'
+    fetch('http://localhost:3000/questions'
         , {
             headers: {
                 'Content-Type': 'application/json',
@@ -20,11 +19,18 @@ function getData() {
             }
         }
     )
-        .then(data => { return data.json(); })
-        .then(res => {
-            qnJson = res["Questions"];
+        .then(res => res.json()).then(data => {
+            // console.log(data);
+            qnJson = data["Questions"];
             currQn = 0;
+            console.log(qnJson);
             loadQuestion(qnJson[currQn]);
+      })
+        .then(res => {
+            // console.log(res.body);
+            // qnJson = res["Questions"];
+            // currQn = 0;
+            // loadQuestion(qnJson[currQn]);
         })
         .catch(error => { alert(error) });
 }
@@ -41,9 +47,11 @@ function loadQuestion(data) {
 
     //empty out the question body div to allow the next question to be loaded in.
 
+    console.log(data.question);
+
     $("#qnBody").empty(); //we should probably convert this page to use jquery tbh
 
-    switch (data.QnsType) { //TODO: add the other question types here
+    switch (data.question.QnsType) { //TODO: add the other question types here
         case "1":
             loadQnType1(data);
             break;
@@ -60,21 +68,23 @@ function loadQuestion(data) {
 
 function loadQnType1(data) {
 
-    correctAns = data.Correct; //store the correct answer
+
+    correctAns = data.question.Correct; //store the correct answer
+
 
     qnType = "1";
 
-    var qnType1 = `<h3 id="qnText">${data.Question}</h3>
+    var qnType1 = `<h3 id="qnText">${data.question.Question}</h3>
     <div>`
 
     //check if there is an image appended.
-    if (data.QnImage) {
+    if (data.question.QnImage) {
         console.log("image found. retrieving image");
-        qnType1 += `<img src="${data.QnImage}">`
+        qnType1 += `<img src="${data.question.QnImage}">`
     }
 
-    for (i = 0; i < data.Answers.length; i++) {
-        qnType1 += `<button onclick="select('${i + 1}')" class="answer">${data.Answers[i]}</button>`
+    for (i = 0; i < data.question.Answers.length; i++) {
+        qnType1 += `<button onclick="select('${i + 1}')" class="answer">${data.question.Answers[i]}</button>`
     }
     qnType1 += `</div> <h2 id="selectedAns">bruh</h2>`;
 
@@ -82,20 +92,21 @@ function loadQnType1(data) {
     console.log("appending type 1 qn");
 }
 
+
 function loadQnType2(data) {
-
     qnType = "2";
-
-    correctAns = data.AcceptedAns; //store the correct answer
-
-
+    correctAns = data.question.AcceptedAns; //store the correct answer
+    console.log(correctAns);
     console.log("loading qn type 2")
-    var qnType2 = `<h3 id="qnText">${data.Question}</h3>
+
+    var qnType2 = `<h3 id="qnText">${data.question.Question}</h3>
     <div>`
-    if (data.QnImage) {
+
+    if (data.question.QnImage) {
         console.log("image found. retrieving image");
-        qnType2 += `<img src="${data.QnImage}">`;
+        qnType2 += `<img src="${data.question.QnImage}">`;
     }
+
     qnType2 += `<input type="text" id="selectedAns" name="answerField"><br>
   </form></div>`
 
@@ -114,13 +125,8 @@ function select(number) {
 
 function lockQuestion() {
     console.log(selectedAns + correctAns);
-
     //read the current question type, then pass judgement.
 
-    if(selectedAns == null || selectedAns == ""){
-        alert("nothing here cb"); //replace with error handling
-        return;
-    }
     switch (qnType) {
         case "1":
             verifyQnType1();
@@ -130,7 +136,11 @@ function lockQuestion() {
             console.log(selectedAns);
             verifyQnType2();
             break;
+        default:
+            alert("something went wrong");
+            
     }
+
 }
 
 function verifyQnType1() {
@@ -146,6 +156,11 @@ function verifyQnType1() {
 }
 
 function verifyQnType2() {
+    if(selectedAns == ""){
+        alert("nothing here")
+        return;
+    }
+
     var isCorrect = false;
 
     for (i = 0; i < correctAns.length; i++) {

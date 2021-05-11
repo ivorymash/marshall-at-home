@@ -156,6 +156,26 @@ app.post("/user/create", (req, res) => {
 
 })
 
+app.get("/questions", (req,res) => {
+
+    db.getQuestion((result) => {
+        var jsonConstructed = `{"Questions" : [`
+
+
+        for(i=0; i<result.results.length; i++){
+            jsonConstructed += JSON.stringify(result.results[i]);
+            jsonConstructed += `,`
+        }
+        jsonConstructed = jsonConstructed.substring(0, jsonConstructed.length - 1);
+        jsonConstructed += `]}`;
+
+        // console.log(jsonConstructed);
+
+        return res.status(200).send(jsonConstructed);
+    })
+
+})
+
 app.post('/reset', (req, res) => {
     db.resetTables((result) => {
         console.log('result' + result.err);

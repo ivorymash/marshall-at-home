@@ -3,12 +3,7 @@ var selectedAns; //catch all variable for the answer picked/typed/whatever.
 var correctAns;
 var currQn;
 var qnJson;
-
-function stuff() {
-    $.getJSON("sampleQns.json"), function (data) {
-        console.log(data);
-    }
-}
+var questionsAnsweredTrack = new Array;
 
 function getData() {
     fetch('http://localhost:3000/questions'
@@ -23,9 +18,9 @@ function getData() {
             // console.log(data);
             qnJson = data["Questions"];
             currQn = 0;
-            console.log(qnJson);
+            loadQuestionTracks();
             loadQuestion(qnJson[currQn]);
-      })
+        })
         .then(res => {
             // console.log(res.body);
             // qnJson = res["Questions"];
@@ -42,10 +37,31 @@ function loadNext() {
 }
 
 
+function loadQuestionTracks() {
+    for (i = 0; i < qnJson.length; i++) {
+        questionsAnsweredTrack.push("- ")
+    }
+    console.log("ok");
+
+}
+
+
+function updateQuestionTrack() {
+
+    document.getElementById("checkmark").innerHTML = questionsAnsweredTrack;
+
+}
 function loadQuestion(data) {
     //TODO: add support for question types
 
     //empty out the question body div to allow the next question to be loaded in.
+
+    if (currQn == qnJson.length) { //all questions done
+        alert("No more qns");
+        window.location.replace("index.html");
+    }
+
+    updateQuestionTrack();
 
     console.log(data.question);
 
@@ -64,6 +80,7 @@ function loadQuestion(data) {
             break;
 
     }
+
 }
 
 function loadQnType1(data) {
@@ -138,25 +155,25 @@ function lockQuestion() {
             break;
         default:
             alert("something went wrong");
-            
+
     }
 
 }
 
 function verifyQnType1() {
     if (selectedAns == correctAns) {
-
         alert("right");
-
+        questionsAnsweredTrack[currQn] = "O "
     } else {
         alert("wrong");
+        questionsAnsweredTrack[currQn] = "X "
     }
     currQn++;
     loadQuestion(qnJson[currQn]);
 }
 
 function verifyQnType2() {
-    if(selectedAns == ""){
+    if (selectedAns == "") {
         alert("nothing here")
         return;
     }
@@ -169,7 +186,14 @@ function verifyQnType2() {
         }
     }
 
-    isCorrect ? alert("right") : alert("wrong")
+    // isCorrect ? alert("right") : alert("wrong")
+    if (isCorrect) {
+        alert("right");
+        questionsAnsweredTrack[currQn] = "O "
+    }else {
+        alert("wrong");
+        questionsAnsweredTrack[currQn] = "X "
+    }
     currQn++;
     loadQuestion(qnJson[currQn]);
 }

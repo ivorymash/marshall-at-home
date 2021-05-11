@@ -3,7 +3,7 @@ var selectedAns; //catch all variable for the answer picked/typed/whatever.
 var correctAns;
 var currQn;
 var qnJson;
-var questionsAnsweredTrack = new Array;
+var questionsAnsweredTrack = new Array; 
 
 function getData() {
     fetch('http://localhost:3000/questions'
@@ -36,7 +36,6 @@ function loadNext() {
     loadQuestion(qnJson[currQn])
 }
 
-
 function loadQuestionTracks() {
     for (i = 0; i < qnJson.length; i++) {
         questionsAnsweredTrack.push("- ")
@@ -52,7 +51,6 @@ function updateQuestionTrack() {
 
 }
 function loadQuestion(data) {
-    //TODO: add support for question types
 
     //empty out the question body div to allow the next question to be loaded in.
 

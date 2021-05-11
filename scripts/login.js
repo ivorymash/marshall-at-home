@@ -16,9 +16,12 @@ function signIn() {
     .then(res => res.json()).then(data => {
       if(keepSignedIn){
         localStorage.setItem('token', data.token); //sets to storage, which is persistent
+        localStorage.setItem('user', data.username);
+        localStorage.setItem('id', data.id);
       }else{
         sessionStorage.setItem('token', data.token); //temporary, only for current tab
         sessionStorage.setItem('user', data.username);
+        sessionStorage.setItem('id', data.id);
       }
 
       window.location.replace("index.html");

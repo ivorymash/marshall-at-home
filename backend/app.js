@@ -89,13 +89,14 @@ app.post("/user", (req, res) => {
                 }
                 var pass = result.results[0].password; //this is janky, there has to be a better way.
                 var username = result.results[0].username;
+                var userid = result.results[0].id;
 
                 bcrypt.compare(password, pass, function (err, result) {
                     if (result == true) {
                         console.log("password is correct");
                         generateAccessToken(username)
                             .then((token) => {
-                                return res.status(202).send({ 'token': token, 'username' : username}); //if the js sees the 202 status, keep the name in session storagee
+                                return res.status(202).send({ 'token': token, 'username' : username, 'id' : userid}); //if the js sees the 202 status, keep the name in session storagee
                             })
                     } else {
                         console.log("bruh");
@@ -128,6 +129,16 @@ app.get("/token", (req, res) => {
 
 })
 
+app.post("/user/profile/history", (req,res) => { //get quiz history
+    const userid = req.body.userid;
+
+    db.getQuizHistory(userid, (result) => {
+        console.log(result);
+
+        return res.send(result.results);
+    });
+})
+
 //create user api
 app.post("/user/create", (req, res) => {
     const username = req.body.username;
@@ -156,7 +167,7 @@ app.post("/user/create", (req, res) => {
 
 })
 
-app.get("/questions", (req,res) => {
+app.get("/questions", (req,res) => { //get a bunch of questions
 
     db.getQuestion((result) => {
         var jsonConstructed = `{"Questions" : [`
@@ -174,6 +185,16 @@ app.get("/questions", (req,res) => {
         return res.status(200).send(jsonConstructed);
     })
 
+})
+
+app.post("/quiz/submit", (req,res) => { //get quiz history
+    const userid = req.body.userid;
+    const totalQuestions = req.body.totalQuestions;
+    const correctQuestions = req.body.correctQuestions;
+
+    db.postQuizResult(userid,totalQuestions,correctQuestions, (result) => {
+
+    })
 })
 
 app.post('/reset', (req, res) => {

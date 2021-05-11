@@ -6,7 +6,7 @@ class Database {
 
     GetUser(email, callback) {
         this.pool
-        .query('SELECT password,username FROM "users" WHERE email = $1',[email], (err,res) => {
+        .query('SELECT password,username, id FROM "users" WHERE email = $1',[email], (err,res) => {
             if(err){return callback({'error':err,'results':null})}
             return callback({'error':err, 'results': res.rows})
         })
@@ -23,23 +23,39 @@ class Database {
 
     getQuestion(callback) {
         this.pool
-        .query(`SELECT question FROM "question_bank" ORDER BY random() LIMIT 5`, (err,res) => {
+        .query(`SELECT question, id FROM "question_bank" ORDER BY random() LIMIT 5`, (err,res) => {
             if(err){return callback({'error':err,'results':null})}
             return callback({'error':err, 'results': res.rows})
         })
     }
 
-
-    resetTables(callback) {
+    getQuizHistory(userid, callback) {
         this.pool
-        .query('DELETE FROM customers; DELETE FROM companies', (err, res) => {
+        .query(`SELECT * FROM "quiz_history" WHERE user_id = $1 ORDER BY time_of_quiz DESC`, [userid], (err,res) => {
             if(err){return callback({'error':err,'results':null})}
             return callback({'error':err, 'results': res.rows})
         })
-        /**
-         * return a promise that resolves when the database is successfully reset, and rejects if there was any error.
-         */
     }
+
+    
+    postQuizResult(userid, callback) {
+        this.pool
+        .query(`INSERT into quiz_history(user_id,total_questions,correct_questions,time_of_quiz) values($1, $2, $3, current_timestamp);`, [userid,totalQuestions,correctQuestions], (err,res) => {
+            if(err){return callback({'error':err,'results':null})}
+            return callback({'error':err, 'results': res.rows})
+        })
+    }
+
+    // resetTables(callback) {
+    //     this.pool
+    //     .query('DELETE FROM customers; DELETE FROM companies', (err, res) => {
+    //         if(err){return callback({'error':err,'results':null})}
+    //         return callback({'error':err, 'results': res.rows})
+    //     })
+    //     /**
+    //      * return a promise that resolves when the database is successfully reset, and rejects if there was any error.
+    //      */
+    // }
 
     closeDatabaseConnections() {
         /**

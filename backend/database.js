@@ -4,17 +4,17 @@ class Database {
         this.pool = new Pool({connectionString:"postgres://eahuades:lUS9GNIv8WITduW1JawMXYFgaIjSWh3Z@arjuna.db.elephantsql.com:5432/eahuades"});
     }
 
-    GetUser(username, callback) {
+    GetUser(email, callback) {
         this.pool
-        .query('SELECT password FROM "users" WHERE username = $1',[username], (err,res) => {
+        .query('SELECT password,username FROM "users" WHERE email = $1',[email], (err,res) => {
             if(err){return callback({'error':err,'results':null})}
             return callback({'error':err, 'results': res.rows})
         })
     }
 
-    CreateUser(username, password, callback) {
+    CreateUser(username, password,email, callback) {
         this.pool
-        .query(`INSERT INTO Users (username, password) VALUES($1, $2)`, [username, password], (err, res) => {
+        .query(`INSERT INTO Users (username, password, email) VALUES($1, $2, $3)`, [username, password, email], (err, res) => {
             if(err){return callback({'error':err,'results':null})}
             return callback({'error':err, 'results': res.rows})
         })

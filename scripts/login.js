@@ -1,7 +1,7 @@
 function signIn() {
-  var username = document.getElementById("username").value;
+  var email = document.getElementById("email").value;
   var password = document.getElementById("password").value;
-  console.log(username, password);
+  console.log(email, password);
   let keepSignedIn = document.getElementById("keepSignedIn").checked;
 
   fetch("http://localhost:3000/user",
@@ -11,14 +11,14 @@ function signIn() {
         'Content-Type': 'application/json'
       },
       method: "POST",
-      body: JSON.stringify({ username: username, password: password })
+      body: JSON.stringify({ email: email, password: password })
     })
     .then(res => res.json()).then(data => {
       if(keepSignedIn){
         localStorage.setItem('token', data.token); //sets to storage, which is persistent
       }else{
         sessionStorage.setItem('token', data.token); //temporary, only for current tab
-        sessionStorage.setItem('user', username);
+        sessionStorage.setItem('user', data.username);
       }
 
       window.location.replace("index.html");

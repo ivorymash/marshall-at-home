@@ -67,30 +67,35 @@ app.use(express.json());
 app.post("/user", (req, res) => {
 
     try {
-        const username = req.body.username;
+        const email = req.body.email;
         const password = req.body.password;
 
-        if(!username || !password){
+        if(!email || !password){
             return res.sendStatus(400);
         }
 
-        console.log(username, password);
+        console.log(email, password);
 
-        db.GetUser(username, (result) => {
+        db.GetUser(email, (result) => {
             // console.log(result);
             if (result.err != null) {
                 console.log(result.err);
                 return res.sendStatus(500);
             } else {
                 console.log(result);
+                if(result.results[0] == null){
+                    console.log("not exist user");
+                    return res.sendStatus(401);
+                }
                 var pass = result.results[0].password; //this is janky, there has to be a better way.
+                var username = result.results[0].username;
 
                 bcrypt.compare(password, pass, function (err, result) {
                     if (result == true) {
                         console.log("password is correct");
                         generateAccessToken(username)
                             .then((token) => {
-                                return res.status(202).send({ 'token': token }); //if the js sees the 202 status, keep the name in session storagee
+                                return res.status(202).send({ 'token': token, 'username' : username}); //if the js sees the 202 status, keep the name in session storagee
                             })
                     } else {
                         console.log("bruh");
@@ -124,9 +129,10 @@ app.get("/token", (req, res) => {
 })
 
 //create user api
-app.post("/user", (req, res) => {
+app.post("/user/create", (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
+    const email = req.body.email;
     console.log(username, password);
     //do some filtering and testing here
     if (username == null || password == null) {
@@ -136,7 +142,7 @@ app.post("/user", (req, res) => {
     bcrypt.hash(password, saltRounds, function (err, hash) {
         if (err) { return res.sendStatus(500) };
 
-        db.CreateUser(username, hash, (result) => {
+        db.CreateUser(username, hash, email, (result) => {
             if (result.err != null) {
                 console.log(result.err);
                 return res.sendStatus(500);

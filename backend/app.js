@@ -85,7 +85,7 @@ app.post("/user", (req, res) => {
                 console.log(result);
                 if(result.results[0] == null){
                     console.log("not exist user");
-                    return res.sendStatus(401);
+                    return res.status(401).send({'error' : "user does not exist!"});
                 }
                 var pass = result.results[0].password; //this is janky, there has to be a better way.
                 var username = result.results[0].username;
@@ -100,7 +100,7 @@ app.post("/user", (req, res) => {
                             })
                     } else {
                         console.log("bruh");
-                        return res.sendStatus(401);
+                        return res.status(401).send({ 'error' : 'password is wrong!'});
                     }
                 });
 

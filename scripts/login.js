@@ -14,6 +14,11 @@ function signIn() {
       body: JSON.stringify({ email: email, password: password })
     })
     .then(res => res.json()).then(data => {
+      console.log(data);
+      if(data.error){
+        document.getElementById("error").innerHTML = data.error;
+        return;
+      }
       if(keepSignedIn){
         localStorage.setItem('token', data.token); //sets to storage, which is persistent
         localStorage.setItem('user', data.username);

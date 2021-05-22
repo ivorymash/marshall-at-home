@@ -2,7 +2,9 @@ function signIn() {
   var email = document.getElementById("email").value;
   var password = document.getElementById("password").value;
   console.log(email, password);
-  let keepSignedIn = document.getElementById("keepSignedIn").checked;
+  let keepSignedIn = document.getElementById("remember").checked;
+
+  event.preventDefault();
 
   fetch("http://localhost:3000/user",
     {

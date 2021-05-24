@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Marshall@Home &mdash; Login</title>
+    <title>Marshall@Home &mdash; Forgot Password</title>
 
     <!--CSS-->
     <link rel="stylesheet" type="text/css" href="css/login.css" />
@@ -23,7 +23,7 @@
             </div>
             <div class="card fat">
               <div class="card-body">
-                <h4 class="card-title">Login</h4>
+                <h4 class="card-title">Forgot Password</h4>
                 <form method="" class="login-validation" novalidate="">
                   <div class="form-group">
                     <label for="email">E-Mail Address</label>
@@ -37,52 +37,16 @@
                       autofocus
                     />
                     <div class="invalid-feedback">Email is invalid</div>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="password"
-                      >Password
-                      <a href="forgot.html" class="float-right">
-                        Forgot Password?
-                      </a>
-                    </label>
-                    <input
-                      id="password"
-                      type="password"
-                      class="form-control"
-                      name="password"
-                      required
-                      data-eye
-                    />
-                    <div class="invalid-feedback">Password is required</div>
-                  </div>
-
-                  <div class="form-group">
-                    <div class="custom-checkbox custom-control">
-                      <input
-                        type="checkbox"
-                        name="remember"
-                        id="remember"
-                        class="custom-control-input"
-                      />
-                      <label for="remember" class="custom-control-label"
-                        >Remember Me</label
-                      >
+                    <div class="form-text text-muted">
+                      By clicking "Reset Password" we will send a password reset
+                      link
                     </div>
                   </div>
 
                   <div class="form-group m-0">
-                    <button
-                      type="submit"
-                      class="btn btn-block"
-                      onclick="signIn()"
-                    >
-                      Login
+                    <button type="submit" class="btn btn-block">
+                      Reset Password
                     </button>
-                  </div>
-                  <div class="mt-4 text-center">
-                    Don't have an account?
-                    <a href="register.html">Create One</a>
                   </div>
                 </form>
               </div>

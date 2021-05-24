@@ -1,0 +1,46 @@
+html,
+body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+.side-navbar {
+  width: 180px;
+  height: 100%;
+  position: fixed;
+  margin-left: -300px;
+  background-color: #100901;
+  transition: 0.5s;
+}
+
+#logInOrOut {
+    margin: 0;
+}
+
+.my-container {
+  transition: 0.4s;
+}
+
+.active-nav {
+  margin-left: 0;
+}
+
+.active-cont {
+  margin-left: 180px;
+}
+
+#menu-btn {
+  background-color: white;
+  margin-left: 20px;
+}
+
+#footer {
+   position:absolute;
+   bottom:0;
+   width:100%;
+   height:60px;
+}
+
+.navbar {
+    background-color: #F29526;
+}

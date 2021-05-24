@@ -11,14 +11,7 @@
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
     />
-
-    <!--Scripts-->
-    <script src="/scripts/login.js"></script>
-    <script src="/scripts/signinlogic.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
   <body class="login-page">
     <section class="h-100">
@@ -31,7 +24,7 @@
             <div class="card fat">
               <div class="card-body">
                 <h4 class="card-title">Login</h4>
-                <form method="" class="my-login-validation" novalidate="">
+                <form method="" class="login-validation" novalidate="">
                   <div class="form-group">
                     <label for="email">E-Mail Address</label>
                     <input
@@ -79,7 +72,11 @@
                   </div>
 
                   <div class="form-group m-0">
-                    <button type="submit" class="btn btn-primary btn-block" onclick="signIn()">
+                    <button
+                      type="submit"
+                      class="btn btn-block"
+                      onclick="signIn()"
+                    >
                       Login
                     </button>
                   </div>
@@ -90,17 +87,20 @@
                 </form>
               </div>
             </div>
-            <div class="footer">Copyright &copy; 2021 &mdash; Marshalling@Home</div>
+            <div class="footer">
+              Copyright &copy; 2021 &mdash; Marshalling@Home
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!--Scripts-->
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="/scripts/login.js"></script>
+    <script src="/scripts/login-validation.js"></script>
+    <script src="/scripts/signinlogic.js"></script>
   </body>
 </html>

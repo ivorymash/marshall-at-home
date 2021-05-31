@@ -1,7 +1,12 @@
 function signInMessage() {
   // document.cookie = "user=Yourmother";
   console.log("doing this");
-  var signedIn = window.sessionStorage.getItem("user").toUpperCase();
+  var signedIn = window.sessionStorage.getItem("user");
+
+  if(signedIn == null){
+    signedIn = window.localStorage.getItem("user");
+  }
+
   //signedIn returns either the value of the cookie or null, depending on if the cookie exists.
   var signInMsg = "WELCOME BACK ";
   if (signedIn == null) {
@@ -17,15 +22,15 @@ function signInMessage() {
   var GM = "";
 
   if (curHr < 12) {
-    GM = "GOOD MORNING ";
+    GM = "Good Morning, ";
   } else if (curHr < 18) {
-    GM = "GOOD AFTERNOON ";
+    GM = "Good Afternoon, ";
   } else {
-    GM = "GOOD EVENING ";
+    GM = "Good Evening, ";
   }
 
   var homeHead = GM;
-  var homeHead2 = "<br>WHAT WOULD YOU LIKE TO GET STARTED WITH?";
+  var homeHead2 = "<br>What would you like to get started with?";
   if (signedIn == null) {
     signInMsg += "Guest";
     loginBtn(false);

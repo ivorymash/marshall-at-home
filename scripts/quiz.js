@@ -6,6 +6,7 @@ var currQn;
 var qnJson;
 var questionsAnsweredTrack = new Array; 
 
+
 function getData() {
     fetch('http://localhost:3000/questions'
         , {
@@ -224,14 +225,3 @@ function submitResults(){
         })
         .catch(error => { alert(error) });
 }
-
-//others
-
-/*For the sidebar*/
-var menu_btn = document.querySelector("#menu-btn");
-var sidebar = document.querySelector("#sidebar");
-var container = document.querySelector(".my-container");
-menu_btn.addEventListener("click", () => {
-  sidebar.classList.toggle("active-nav");
-  container.classList.toggle("active-cont");
-});

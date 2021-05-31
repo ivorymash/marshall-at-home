@@ -73,6 +73,12 @@ function logOut() {
   window.location.replace("login.html");
 }
 
+
+function hideSidebarOnStart(){ //jank solution to a problem that shouldn't have existed
+  sidebar.classList.toggle("active-nav");
+  container.classList.toggle("active-cont");
+}
+
 /*For the sidebar*/
 var menu_btn = document.querySelector("#menu-btn");
 var sidebar = document.querySelector("#sidebar");

@@ -5,6 +5,7 @@ body {
 }
 
 .side-navbar {
+  display : none;
   width: 180px;
   height: 100%;
   position: fixed;

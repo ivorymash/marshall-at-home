@@ -3,7 +3,7 @@ function signInMessage() {
   console.log("doing this");
   var signedIn = window.sessionStorage.getItem("user");
 
-  if(signedIn == null){
+  if (signedIn == null) {
     signedIn = window.localStorage.getItem("user");
   }
 
@@ -66,6 +66,10 @@ function loginBtn(isLoggedIn) {
 function logOut() {
   window.localStorage.removeItem("token");
   window.sessionStorage.removeItem("token");
+  window.localStorage.removeItem("id");
+  window.sessionStorage.removeItem("id");
+  window.localStorage.removeItem("user");
+  window.sessionStorage.removeItem("user");
   window.location.replace("login.html");
 }
 

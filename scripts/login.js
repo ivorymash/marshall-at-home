@@ -17,15 +17,15 @@ function signIn() {
     })
     .then(res => res.json()).then(data => {
       console.log(data);
-      if(data.error){
+      if (data.error) {
         document.getElementById("error").innerHTML = data.error;
         return;
       }
-      if(keepSignedIn){
+      if (keepSignedIn) {
         localStorage.setItem('token', data.token); //sets to storage, which is persistent
         localStorage.setItem('user', data.username);
         localStorage.setItem('id', data.id);
-      }else{
+      } else {
         sessionStorage.setItem('token', data.token); //temporary, only for current tab
         sessionStorage.setItem('user', data.username);
         sessionStorage.setItem('id', data.id);
@@ -36,4 +36,36 @@ function signIn() {
     })
     .catch(function (res) { console.log(res) })
 
+}
+
+function registerAccount() {
+  var name = document.getElementById("name").value;
+  var email = document.getElementById("email").value;
+  var password = document.getElementById("password").value;
+
+  fetch("http://localhost:3000/user/create",
+    {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: JSON.stringify({ email: email, password: password, username: name })
+    }).then(res => {
+      if (res.status == "401") {
+        alert("something u fucked up");
+      }
+
+      if (res.status == "201") {
+        console.log("dababy les go");
+        window.location.replace("login.html");
+
+      }
+
+    })
+    .catch(res => {
+      alert(res);
+    })
+
+  event.preventDefault();
 }

@@ -6,11 +6,16 @@ function signInMessage() {
   if (signedIn == null) {
     signedIn = window.localStorage.getItem("user");
   }
-  
+
+  homeheaderStuff(signedIn);
+
   navbar = document.getElementById("navbar");
-  navbar.innerHTML += `          <li class="nav-item">
+  navbar.innerHTML += `<li class="nav-item">
   <a class="nav-link" href="#">Extra Things</a>
-</li>`
+</li>` //use this to deal with the lecturer stuff.
+}
+function homeheaderStuff(username) {
+  document.getElementById("homeHeader").innerHTML = "whats good in the hood, " + username;
 }
 
 function loginBtn(isLoggedIn) {
@@ -40,18 +45,3 @@ function logOut() {
   window.sessionStorage.removeItem("user");
   window.location.replace("login.html");
 }
-
-
-function hideSidebarOnStart(){ //jank solution to a problem that shouldn't have existed
-  sidebar.classList.toggle("active-nav");
-  container.classList.toggle("active-cont");
-}
-
-/*For the sidebar*/
-var menu_btn = document.querySelector("#menu-btn");
-var sidebar = document.querySelector("#sidebar");
-var container = document.querySelector(".my-container");
-menu_btn.addEventListener("click", () => {
-  sidebar.classList.toggle("active-nav");
-  container.classList.toggle("active-cont");
-});

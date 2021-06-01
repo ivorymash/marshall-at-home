@@ -8,111 +8,102 @@
   <title>Marshall@Home &mdash; Home</title>
 
   <!--CSS-->
-  <link rel="stylesheet" href="css/index.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.5.0/mdb.min.css" rel="stylesheet" />
-</head>
-
-<body onload="signInLogic()" class="home-page">
-  <div class="
-        side-navbar
-        active-nav
-        d-flex
-        justify-content-between
-        flex-wrap flex-column
-        align-items-center
-      " id="sidebar">
-    <ul class="nav flex-column text-white w-75">
-      
-      <a class="nav-link h3 text-white my-2 p-5"></a>
-      <a class="nav-link h3 text-white my-2 p-5"></a>
-      <a class="nav-link h3 text-white my-2 p-5"></a>
-      <a class="nav-link h3 text-white my-2 p-5"></a>
-      <a class="nav-link h3 text-white my-2 p-5"></a>
-      <a class="nav-link h3 text-white my-2 p-5"></a>
-      <a class="nav-link h3 text-white my-2 p-5"></a>
-      <a href="profile.html" class="nav-link h3 text-white my-2 text-center" id="profileName"></a>
-      <a class="btn btn-primary" id="logInOutDiv">
-        <p id="logInOrOut" class="align-text-center justify-content-center">Log In</p>
-      </a>
-  </div>
-  <div class="my-container active-cont h-100">
-    <nav class="navbar navbar-expand-lg">
-      <a class="btn border-0" id="menu-btn">
-        <i class="bx bx-menu"></i>
-      </a>
-      <div class="container-fluid justify-content-center">
-        <h1 id="signInBanner" class="text-white m-0"></h1>
-      </div>
-    </nav>
-    <section class="text-center">
-      <h2 class="mb-5 mt-5 align-items-center" id="homeHeader"></h2>
-
-      <div class="row">
-        <div class="col-lg-6 mb-4">
-          <div class="card">
-            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-              <!--Need to change this image-->
-              <img src="https://mdbootstrap.com/img/new/standard/nature/184.jpg" class="img-fluid" />
-              <a href="http://127.0.0.1:5500/learn.html">
-                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
-              </a>
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">LEARN</h5>
-              <p class="card-text">
-                Learn all about the
-                fundamentals of airplane <br>
-                marshalling in this course or
-                refresh your memory.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-6 mb-4">
-          <div class="card">
-            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-              <!--Need to change this image-->
-              <img src="https://mdbootstrap.com/img/new/standard/nature/023.jpg" class="img-fluid" />
-              <a href="http://127.0.0.1:5500/quiz.html">
-                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
-              </a>
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">QUIZ</h5>
-              <p class="card-text">
-                Are you confident
-                in your airplane marshalling
-                knowledge?<br>Test it out in our
-                very own quiz.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <div id="footer" class="bg-light text-lg-start">
-      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-        Copyright &copy; 2021 &mdash; Marshalling@Home
-      </div>
-    </div>
-  </div>
-
-  <!--Scripts-->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.5.0/mdb.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/reefjs@8/dist/reef.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://kit.fontawesome.com/1b85d509e9.js" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="css/index.css" />
   <script src="/scripts/index.js"></script>
   <script src="/scripts/signinlogic.js"></script>
-  <script>
-    signInMessage();
-    hideSidebarOnStart();
-  </script>
+</head>
+
+<body onload="signInLogic()" class="home-page">
+
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <div class="navbar-brand">
+        <a href="#">
+          <img class="logo" src="/images/logoicon.png" alt="Marshalling@Home!">
+        </a>
+      </div>
+      <ul class="navbar-nav" id="navbar">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Learn</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Quiz</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Profile</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+
+  <div class="my-container active-cont">
+    <section class="text-center">
+      <h2 class="mb-5 mt-5 align-items-center" id="homeHeader">fucking text here</h2>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 mb-4">
+            <div class="card shadow">
+              <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                <!--Need to change this image-->
+                <img src="https://mdbootstrap.com/img/new/standard/nature/184.jpg" class="img-fluid" />
+                <a href="http://127.0.0.1:5500/learn.html">
+                  <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
+                </a>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">LEARN</h5>
+                <p class="card-text">
+                  Learn all about the
+                  fundamentals of airplane <br>
+                  marshalling in this course or
+                  refresh your memory.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 mb-4">
+            <div class="card shadow">
+              <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                <!--Need to change this image-->
+                <img src="https://mdbootstrap.com/img/new/standard/nature/023.jpg" class="img-fluid" />
+                <a href="http://127.0.0.1:5500/quiz.html">
+                  <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
+                </a>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">QUIZ</h5>
+                <p class="card-text">
+                  Are you confident
+                  in your airplane marshalling
+                  knowledge?<br>Test it out in our
+                  very own quiz.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--Scripts-->
+
+    <script>
+      signInMessage();
+      hideSidebarOnStart();
+    </script>
 </body>
 
 </html>

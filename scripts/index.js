@@ -6,43 +6,11 @@ function signInMessage() {
   if (signedIn == null) {
     signedIn = window.localStorage.getItem("user");
   }
-
-  //signedIn returns either the value of the cookie or null, depending on if the cookie exists.
-  var signInMsg = "WELCOME BACK ";
-  if (signedIn == null) {
-    signInMsg += "Guest";
-    loginBtn(false);
-  } else {
-    signInMsg += signedIn + "!";
-    loginBtn(true);
-  }
-
-  var today = new Date();
-  var curHr = today.getHours();
-  var GM = "";
-
-  if (curHr < 12) {
-    GM = "Good Morning, ";
-  } else if (curHr < 18) {
-    GM = "Good Afternoon, ";
-  } else {
-    GM = "Good Evening, ";
-  }
-
-  var homeHead = GM;
-  var homeHead2 = "<br>What would you like to get started with?";
-  if (signedIn == null) {
-    signInMsg += "Guest";
-    loginBtn(false);
-  } else {
-    homeHead += signedIn + "!";
-    homeHead += homeHead2;
-    loginBtn(true);
-  }
-
-  document.getElementById("profileName").innerHTML = signedIn;
-  document.getElementById("signInBanner").innerHTML = signInMsg;
-  document.getElementById("homeHeader").innerHTML = homeHead;
+  
+  navbar = document.getElementById("navbar");
+  navbar.innerHTML += `          <li class="nav-item">
+  <a class="nav-link" href="#">Extra Things</a>
+</li>`
 }
 
 function loginBtn(isLoggedIn) {

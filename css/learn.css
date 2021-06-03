@@ -27,8 +27,6 @@ body {
     border-radius: 10px;
 }
 
-
-
 .learntab {
     margin-top: 10px;
     background-color: white;
@@ -56,8 +54,7 @@ body {
     top: 50%;
 }
 
-.smth {
-    
+.smth{
     transition: background-color 0.2s;
     margin-top: 10px;
     background-color: white;
@@ -65,12 +62,20 @@ body {
     border-radius: 5px;
 }
 
+#loadingArticle{
+    display:none;
+}
 
 .smth:hover {
     transition: background-color 0.2s;
-    margin-top: 10px;
     background-color: #F29526;
     color: #ffffff;
-    height: 70px;
-    border-radius: 5px;
+}
+
+.isCompleted{
+    display: none; /* change to inline */
+    color: #52b69a;
+    position: relative;
+    bottom: 20%;
+    left: 10px;
 }

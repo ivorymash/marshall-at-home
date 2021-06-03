@@ -220,12 +220,31 @@ app.post("/article/create", (req,res) => {
 
 })
 
+app.post("/article", (req,res) => {
+    var id = req.body.id;
+    console.log(id);
+
+    db.getArticle(id, (result) => {
+        if(result.error != null ){
+            console.log("something went wrong");
+            console.log(result.error);
+            return res.sendStatus(400);
+        }
+        console.log(result);
+        return res.status(200).send(result.results);
+    })
+})
+
 app.get("/article/sidebar", (req, res) => { //get articles summaries for sidebar
 
     db.getAllArticles((result) => {
-        console.log(result);
+        if(result.error != null ){
+            console.log("something went wrong");
+            console.log(result.error);
+            return res.sendStatus(400);
+        }
         console.log("UHHHH");
-        res.status(200).send(result.results);
+        return res.status(200).send(result.results);
     })
 
 })

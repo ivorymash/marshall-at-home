@@ -63,6 +63,14 @@ class Database {
         })
     }
 
+    getArticle(id, callback) {
+        this.pool
+        .query(`SELECT * from articles WHERE id = $1`, [id], (err,res) => {
+            if(err){return callback({'error':err,'results':null})}
+            return callback({'error':err, 'results': res.rows})
+        })
+    }
+
     // resetTables(callback) {
     //     this.pool
     //     .query('DELETE FROM customers; DELETE FROM companies', (err, res) => {

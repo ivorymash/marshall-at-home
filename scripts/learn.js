@@ -83,7 +83,9 @@ function getArticle(id) {
 function putArticle(data) {
     console.log(data);
     document.getElementById("article").innerHTML = ""; //clear the page
+
     //this here is janky, sorry!
+    //adds spinner to remove haha
     document.getElementById("article").innerHTML = `<div class="spinner-border text-secondary" id="loadingArticle"></div>`
     removeSpinner("loadingArticle");
 

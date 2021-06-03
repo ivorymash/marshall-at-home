@@ -5,6 +5,7 @@ function getHistory(){
     if(userid == null) {
         userid = window.sessionStorage.getItem('id');
     }
+    removeSpinner("loadingProfile");
     console.log(userid);
 
     fetch('http://localhost:3000/user/profile/history'
@@ -18,10 +19,9 @@ function getHistory(){
         body: JSON.stringify({userid: userid})
         }
     ).then(res => res.json()).then(data => {
-        console.log(data);
         generateTable(data);
+        removeSpinner("loadingHistory")
     })
-
 
 }
 
@@ -49,4 +49,8 @@ function generateTable(data){ //and other stuff
     }
     tablehtml += ` </table>`
     document.getElementById("quizHistoryTable").innerHTML = tablehtml;
+}
+
+function removeSpinner(id) {
+    document.getElementById(id).style.display = "none";
 }

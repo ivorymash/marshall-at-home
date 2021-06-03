@@ -34,6 +34,11 @@ body {
     height: 97%;
 }
 
+#article {
+    padding-top: 2%;
+    padding-left: 5%;
+}
+
 .subjectname {
     width:95%;
     padding-top: 10px;

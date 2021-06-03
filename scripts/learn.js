@@ -1,4 +1,5 @@
-//casual converter js
+//casual variables to store in memory
+var currentArticle;
 
 function createYoutubeEmbed(link, data){
     
@@ -58,6 +59,10 @@ function replaceSidebar(data) {
 }
 
 function getArticle(id) {
+    if(currentArticle == id){
+        return;
+    }
+    currentArticle = id;
     showSpinner("loadingArticle"); //show spinner
 
     fetch('http://localhost:3000/article'

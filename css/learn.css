@@ -1,0 +1,48 @@
+html,
+body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 20px;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #F29526;
+    border-radius: 5px;
+  }
+  
+
+.h-80{
+    height:80%;
+}
+::-webkit-scrollbar {
+    width: 2px;
+}
+
+.mainview{
+    border-radius: 10px;
+}
+
+.smth {
+    margin-top: 10px;
+    background-color: white;
+    height: 70px;
+    border-radius: 5px;
+}
+
+.learntab {
+    margin-top: 10px;
+    background-color: white;
+    border-radius: 5px;
+    height: 97%;
+}
+
+.subjectname {
+    width:95%;
+    padding-top: 10px;
+    padding-left: 10px;
+}

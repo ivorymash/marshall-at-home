@@ -95,7 +95,7 @@ function putArticle(data) {
     document.getElementById("article").innerHTML += `
     <h1><b>${data[0].title}</b></h1>
     <p id="embededvideo"></p>
-    <p>${content}</[p>
+    <p class="contentText overflow-hidden">${content}</p>
     `
     
     //convert the link to an embed link

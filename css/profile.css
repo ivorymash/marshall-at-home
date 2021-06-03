@@ -4,23 +4,46 @@ body {
   overflow-x: hidden;
 }
 
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* Handle */
+::-webkit-scrollbar-thumb {
+    background: #F29526;
+    border-radius: 5px;
+}
+
+.h-80{
+    height:80%;
+}
+
+
 .spinner-border{
     position: relative;
     left: 50%;
     top: 50%;
 }
 
+.historyView{
+}
+
 .historyCard{
-    background: pink;
+    height:90%;
+    padding-top: 2%;
+    padding-left: 5%;
     border-radius: 10px;
-    height:100%;
+}
+
+.profileCard{
+    border-radius: 10px;
     padding-top: 2%;
     padding-left: 5%;
 }
 
-.profileCard{
-    background: pink;
-    border-radius: 10px;
-    padding-top: 2%;
-    padding-left: 5%;
+
+
+.shadow{
+    box-shadow: 0 0 1rem rgba(0,0,0,.15)!important;
 }

@@ -27,12 +27,7 @@ body {
     border-radius: 10px;
 }
 
-.smth {
-    margin-top: 10px;
-    background-color: white;
-    height: 70px;
-    border-radius: 5px;
-}
+
 
 .learntab {
     margin-top: 10px;
@@ -45,4 +40,37 @@ body {
     width:95%;
     padding-top: 10px;
     padding-left: 10px;
+}
+
+.loading{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.spinner-border{
+    position: relative;
+    left: 50%;
+    top: 50%;
+}
+
+.smth {
+    
+    transition: background-color 0.2s;
+    margin-top: 10px;
+    background-color: white;
+    height: 70px;
+    border-radius: 5px;
+}
+
+
+.smth:hover {
+    transition: background-color 0.2s;
+    margin-top: 10px;
+    background-color: #F29526;
+    color: #ffffff;
+    height: 70px;
+    border-radius: 5px;
 }

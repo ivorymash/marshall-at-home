@@ -2,6 +2,7 @@ html,
 body {
   height: 100%;
   overflow-x: hidden;
+  z-index: 0;
 }
 
 .side-navbar {
@@ -32,4 +33,10 @@ body {
 #menu-btn {
   background-color: white;
   margin-left: 20px;
+}
+
+.spinner-border{
+  position: relative;
+  left: 50%;
+  top: 50%;
 }

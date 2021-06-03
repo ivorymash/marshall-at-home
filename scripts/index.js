@@ -7,42 +7,15 @@ function signInMessage() {
     signedIn = window.localStorage.getItem("user");
   }
 
-  //signedIn returns either the value of the cookie or null, depending on if the cookie exists.
-  var signInMsg = "WELCOME BACK ";
-  if (signedIn == null) {
-    signInMsg += "Guest";
-    loginBtn(false);
-  } else {
-    signInMsg += signedIn + "!";
-    loginBtn(true);
-  }
+  homeheaderStuff(signedIn);
 
-  var today = new Date();
-  var curHr = today.getHours();
-  var GM = "";
-
-  if (curHr < 12) {
-    GM = "Good Morning, ";
-  } else if (curHr < 18) {
-    GM = "Good Afternoon, ";
-  } else {
-    GM = "Good Evening, ";
-  }
-
-  var homeHead = GM;
-  var homeHead2 = "<br>What would you like to get started with?";
-  if (signedIn == null) {
-    signInMsg += "Guest";
-    loginBtn(false);
-  } else {
-    homeHead += signedIn + "!";
-    homeHead += homeHead2;
-    loginBtn(true);
-  }
-
-  document.getElementById("profileName").innerHTML = signedIn;
-  document.getElementById("signInBanner").innerHTML = signInMsg;
-  document.getElementById("homeHeader").innerHTML = homeHead;
+  navbar = document.getElementById("navbar");
+  navbar.innerHTML += `<li class="nav-item">
+  <a class="nav-link" href="#">Extra Things</a>
+</li>` //use this to deal with the lecturer stuff.
+}
+function homeheaderStuff(username) {
+  document.getElementById("homeHeader").innerHTML = "whats good in the hood, " + username;
 }
 
 function loginBtn(isLoggedIn) {
@@ -72,18 +45,3 @@ function logOut() {
   window.sessionStorage.removeItem("user");
   window.location.replace("login.html");
 }
-
-
-function hideSidebarOnStart(){ //jank solution to a problem that shouldn't have existed
-  sidebar.classList.toggle("active-nav");
-  container.classList.toggle("active-cont");
-}
-
-/*For the sidebar*/
-var menu_btn = document.querySelector("#menu-btn");
-var sidebar = document.querySelector("#sidebar");
-var container = document.querySelector(".my-container");
-menu_btn.addEventListener("click", () => {
-  sidebar.classList.toggle("active-nav");
-  container.classList.toggle("active-cont");
-});

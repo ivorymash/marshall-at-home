@@ -1,12 +1,6 @@
-
-
 function signInLogic(){
-
     //check if user is signed in if not throw them at the login page
-
-
     //find the fucking token
-
     token = window.localStorage.getItem('token');
     if(token == null) {
         token = window.sessionStorage.getItem('token');

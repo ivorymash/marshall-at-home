@@ -46,6 +46,23 @@ class Database {
         })
     }
 
+    postArticle(authorId, videolink, title, content, callback) {
+        this.pool
+        .query(`INSERT into articles(authorId, videolink, title, content) values($1,$2,$3,$4);`, [authorId, videolink, title, content], (err,res) => {
+            if(err){return callback({'error':err,'results':null})}
+            return callback({'error':err, 'results': res.rows})
+        })
+    }
+
+    getAllArticles(callback) { //for sidebar
+        this.pool
+        .query(`SELECT id, title from articles ORDER BY id`, (err, res) => {
+            if(err){return callback({'error':err, 'results': null})}
+            console.log("OKhere");
+            return callback({'error':err, 'results': res.rows})
+        })
+    }
+
     // resetTables(callback) {
     //     this.pool
     //     .query('DELETE FROM customers; DELETE FROM companies', (err, res) => {

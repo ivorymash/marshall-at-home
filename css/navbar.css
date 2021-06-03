@@ -1,0 +1,25 @@
+
+.logo {
+    width: 30%;
+  }
+  
+  .navbar {
+      background-color: #F29526;
+  }
+  
+  .nav-link {
+    text-decoration: none;
+    color : #FFFFFF;
+  }
+  
+  .nav-link:hover {
+    text-decoration: none;
+    color: #E0E0E0;
+  }
+  
+  
+  .nav-link:active {
+    text-decoration: none;
+    color: #E0E0E0;
+  }
+  

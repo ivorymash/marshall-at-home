@@ -202,6 +202,34 @@ app.get("/questions", (req,res) => { //get a bunch of questions
 
 })
 
+app.post("/article/create", (req,res) => {
+    var authorId = req.body.authorId;
+    var videolink = req.body.videolink;
+    var title = req.body.title;
+    var content = req.body.content;
+
+    db.postArticle(authorId, videolink, title, content, (result) => {
+        if(result.error != null ){
+            console.log("something went wrong");
+            console.log(result.error);
+            return res.sendStatus(400);
+        }
+        console.log("cool");
+        return res.sendStatus(200);
+    })
+
+})
+
+app.get("/article/sidebar", (req, res) => { //get articles summaries for sidebar
+
+    db.getAllArticles((result) => {
+        console.log(result);
+        console.log("UHHHH");
+        res.status(200).send(result.results);
+    })
+
+})
+
 app.post("/quiz/submit", (req,res) => { //submit quiz results
     const userid = req.body.userid;
     const totalQuestions = req.body.totalQuestions;

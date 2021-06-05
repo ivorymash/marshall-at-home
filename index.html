@@ -27,26 +27,9 @@
 
 <body onload="signInLogic()" class="home-page">
 
-  <nav class="navbar navbar-expand-lg">
-    <div class="container">
-      <div class="navbar-brand">
-        <a href="index.html">
-          <img class="logo" src="/images/logoicon.png" alt="Marshalling@Home!">
-        </a>
-      </div>
-      <ul class="navbar-nav" id="navbar">
-        <li class="nav-item">
-          <a class="nav-link" href="learn.html">Learn</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="quiz.html">Quiz</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="profile.html">Profile</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+  <div id="nav-placeholder">
+
+  </div>
 
 
   <div class="my-container active-cont">
@@ -103,8 +86,12 @@
     <!--Scripts-->
 
     <script>
+      $("#nav-placeholder").load("nav.html", function(){
+        //tbh idk why this dosent work
+        $("#navbar").innerHTML += '<li class="nav-item"><a class="nav-link" href="#">Extra Things</a></li>';
+      });
       signInMessage();
-      hideSidebarOnStart();
+      hideSidebarOnStart();    
     </script>
 </body>
 

@@ -75,6 +75,7 @@ body {
 
 
 .tableWrapper{
+    min-height: 700px;
      height: 1px; /*dont know why is works but if u remove it breaks */
 }
 

@@ -6,7 +6,15 @@ class Database {
 
     GetUser(email, callback) {
         this.pool
-        .query('SELECT password,username, id FROM "users" WHERE email = $1',[email], (err,res) => {
+        .query('SELECT password,username,id FROM "users" WHERE email = $1',[email], (err,res) => {
+            if(err){return callback({'error':err,'results':null})}
+            return callback({'error':err, 'results': res.rows})
+        })
+    }
+
+    GetUserFromId(id, callback){ //gets all the user information
+        this.pool
+        .query('SELECT username, email from users WHERE id = $1', [id], (err,res) => {
             if(err){return callback({'error':err,'results':null})}
             return callback({'error':err, 'results': res.rows})
         })

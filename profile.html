@@ -61,8 +61,21 @@
 
                 <div class="profileCard shadow">
                     <div class="spinner-border text-secondary" id="loadingProfile"></div>
-                    <h1 id="nameOfUser">asdasd</h1>
-                    <h1 id="profileName">asdasd</h1>
+                    <h1 id="nameOfUser"></h1>
+                    <img src="https://upload.wikimedia.org/wikipedia/en/4/46/Today_Is_A_Beautiful_Day_album_cover.png"
+                        class="mx-auto d-block img-fluid profilePicture" alt="...">
+                    <div class="form-group">
+                        <label for="username">Name:</label>
+                        <input id="username" type="username" class="form-control" name="username" value=""/>
+                        <label for="email">Email Address:</label>
+                        <input id="email" type="email" class="form-control" name="email" />
+                        <label for="profilePicture">Profile Picture Link:</label>
+                        <input id="profilePicture" type="profilePicture" class="form-control" name="profilePicture" />
+                    </div>
+                    <div>
+                        <h1 id="updateProfile" class="btn btn-outline-warning" onclick="logOut()">Update Profile</h1>
+                    </div>
+                    <h1 id="logOut" class="btn btn-outline-warning" onclick="logOut()">Log Out</h1>
                 </div>
             </div>
 
@@ -82,6 +95,7 @@
 
         <script>
             getHistory();
+            getUserInfo();
         </script>
 </body>
 

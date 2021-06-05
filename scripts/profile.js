@@ -5,7 +5,7 @@ function getHistory(){
     if(userid == null) {
         userid = window.sessionStorage.getItem('id');
     }
-    removeSpinner("loadingProfile");
+    removeSpinner("loadingProfile"); //delete this soon
     console.log(userid);
 
     fetch('http://localhost:3000/user/profile/history'
@@ -23,6 +23,34 @@ function getHistory(){
         removeSpinner("loadingHistory")
     })
 
+}
+
+function getUserInfo(){
+    userid = window.localStorage.getItem('id');
+    if(userid == null) {
+        userid = window.sessionStorage.getItem('id');
+    }
+    removeSpinner("loadingProfile");
+    console.log(userid);
+
+    fetch('http://localhost:3000/user/profile'
+        , {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            
+        method: "POST",
+        body: JSON.stringify({id: userid})
+        }
+    ).then(res => res.json()).then(data => {
+        replaceProfileFields(data[0]);
+    })
+
+}
+
+function replaceProfileFields(data){
+    console.log(data);
 }
 
 function generateTable(data){ //and other stuff
@@ -54,3 +82,13 @@ function generateTable(data){ //and other stuff
 function removeSpinner(id) {
     document.getElementById(id).style.display = "none";
 }
+
+function logOut() {
+    window.localStorage.removeItem("token");
+    window.sessionStorage.removeItem("token");
+    window.localStorage.removeItem("id");
+    window.sessionStorage.removeItem("id");
+    window.localStorage.removeItem("user");
+    window.sessionStorage.removeItem("user");
+    window.location.replace("login.html");
+  }

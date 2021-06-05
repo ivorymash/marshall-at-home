@@ -220,6 +220,21 @@ app.post("/article/create", (req,res) => {
 
 })
 
+app.post("/user/profile", (req,res) => { //get user from id
+    var id = req.body.id;
+    console.log("getting user of id " + id);
+
+    db.GetUserFromId(id, (result) => {
+        if(result.error != null ){
+            console.log("something went wrong");
+            console.log(result.error);
+            return res.sendStatus(400);
+        }
+        console.log(result);
+        return res.status(200).send(result.results);
+    })
+})
+
 app.post("/article", (req,res) => {
     var id = req.body.id;
     console.log(id);

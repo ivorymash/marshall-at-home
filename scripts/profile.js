@@ -49,9 +49,41 @@ function getUserInfo(){
 
 }
 
+function updateProfile(){
+    var email = document.getElementById("email").value;
+    var name = document.getElementById("username").value;
+    var pfp = document.getElementById("profilePicture").value; //do nothing with this for now xd
+    var jwt = window.localStorage.getItem('token');
+    if(jwt == null) {
+        jwt = window.sessionStorage.getItem('token');
+    }
+
+    var id = window.localStorage.getItem('id');
+    if(id == null) {
+        id = window.sessionStorage.getItem('id');
+    }
+
+    fetch('http://localhost:3000/user/profile/update'
+        , {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'authorization': `Bearer ${jwt}`
+            },
+            
+        method: "POST",
+        body: JSON.stringify({username: name, email: email, pfp: pfp, id: id})
+        }
+    )
+}
+
 function replaceProfileFields(data){
     console.log(data);
+    document.getElementById("username").value = data.username;
+    
+    document.getElementById("email").value = data.email;
 }
+
 
 function generateTable(data){ //and other stuff
     username = window.localStorage.getItem("user");

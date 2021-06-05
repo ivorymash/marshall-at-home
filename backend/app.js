@@ -50,6 +50,21 @@ app.use(express.json());
  * =====================================================================
  */
 
+const checkToken = (req, res, next) => {
+    const header = req.headers['authorization'];
+
+    if(typeof header !== 'undefined') {
+        const bearer = header.split(' ');
+        const token = bearer[1];
+
+        req.token = token;
+        next();
+    } else {
+        //If header is undefined return Forbidden (403)
+        res.sendStatus(403)
+    }
+}
+
 /**
  * ========================== SETUP APP =========================
  */
@@ -94,7 +109,7 @@ app.post("/user", (req, res) => {
                 bcrypt.compare(password, pass, function (err, result) {
                     if (result == true) {
                         console.log("password is correct");
-                        generateAccessToken(username)
+                        generateAccessToken(userid, email)
                             .then((token) => {
                                 return res.status(202).send({ 'token': token, 'username' : username, 'id' : userid}); //if the js sees the 202 status, keep the name in session storagee
                             })
@@ -113,10 +128,18 @@ app.post("/user", (req, res) => {
 })
 
 
-async function generateAccessToken(username) {
+async function generateAccessToken(id, email) {
     //this token doesnt expire.
-    const token = await jwt.sign(username, process.env.TOKEN_SECRET);
-    return token
+    const temp = `{"id" : ${id}, "email" : "${email}"}`
+    const usernameJson = JSON.parse(temp); 
+    const token = jwt.sign(usernameJson, process.env.TOKEN_SECRET);
+    return token;
+}
+
+async function verifyJWT(token){
+    const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
+    console.log(decoded);
+    return decoded;
 }
 
 //test token api
@@ -235,6 +258,25 @@ app.post("/user/profile", (req,res) => { //get user from id
     })
 })
 
+app.post("/user/profile/update",checkToken, (req,res) => { //update the user info
+    const id = req.body.id;
+    const username = req.body.username;
+    const email = req.body.email;
+    verifyJWT(req.token)
+    .then((decoded) => {
+        console.log("here");
+        //do a lil check to see if the jwt matches with the person alledgedly that is changing info
+        if(decoded.id==id && decoded.email==email){
+            console.log("verified individual");
+            res.sendStatus(200);
+        }
+        else{
+            console.log("access denied");
+            res.sendStatus(403)
+        }
+    })
+})
+
 app.post("/article", (req,res) => {
     var id = req.body.id;
     console.log(id);
@@ -280,6 +322,9 @@ app.post("/quiz/submit", (req,res) => { //submit quiz results
 /**
  * ========================== UTILS =========================
  */
+
+
+
 
 /**
  * 404

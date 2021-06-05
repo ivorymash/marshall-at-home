@@ -53,7 +53,7 @@ app.use(express.json());
 const checkToken = (req, res, next) => {
     const header = req.headers['authorization'];
 
-    if(typeof header !== 'undefined') {
+    if (typeof header !== 'undefined') {
         const bearer = header.split(' ');
         const token = bearer[1];
 
@@ -85,7 +85,7 @@ app.post("/user", (req, res) => {
         const email = req.body.email;
         const password = req.body.password;
 
-        if(!email || !password){
+        if (!email || !password) {
             return res.sendStatus(400);
         }
 
@@ -98,9 +98,9 @@ app.post("/user", (req, res) => {
                 return res.sendStatus(500);
             } else {
                 console.log(result);
-                if(result.results[0] == null){
+                if (result.results[0] == null) {
                     console.log("not exist user");
-                    return res.status(401).send({'error' : "user does not exist!"});
+                    return res.status(401).send({ 'error': "user does not exist!" });
                 }
                 var pass = result.results[0].password; //this is janky, there has to be a better way.
                 var username = result.results[0].username;
@@ -111,11 +111,11 @@ app.post("/user", (req, res) => {
                         console.log("password is correct");
                         generateAccessToken(userid, email)
                             .then((token) => {
-                                return res.status(202).send({ 'token': token, 'username' : username, 'id' : userid}); //if the js sees the 202 status, keep the name in session storagee
+                                return res.status(202).send({ 'token': token, 'username': username, 'id': userid }); //if the js sees the 202 status, keep the name in session storagee
                             })
                     } else {
                         console.log("bruh");
-                        return res.status(401).send({ 'error' : 'password is wrong!'});
+                        return res.status(401).send({ 'error': 'password is wrong!' });
                     }
                 });
 
@@ -131,12 +131,12 @@ app.post("/user", (req, res) => {
 async function generateAccessToken(id, email) {
     //this token doesnt expire.
     const temp = `{"id" : ${id}, "email" : "${email}"}`
-    const usernameJson = JSON.parse(temp); 
+    const usernameJson = JSON.parse(temp);
     const token = jwt.sign(usernameJson, process.env.TOKEN_SECRET);
     return token;
 }
 
-async function verifyJWT(token){
+async function verifyJWT(token) {
     const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
     console.log(decoded);
     return decoded;
@@ -152,7 +152,7 @@ app.get("/token", (req, res) => {
 
 })
 
-app.post("/user/profile/history", (req,res) => { //get quiz history
+app.post("/user/profile/history", (req, res) => { //get quiz history
     const userid = req.body.userid;
 
     db.getQuizHistory(userid, (result) => {
@@ -178,12 +178,12 @@ app.post("/user/create", (req, res) => {
 
         db.CreateUser(username, hash, email, (result) => {
             if (result.error != null) {
-                
+
                 console.log("we got some shit here");
-                
+
                 console.log(result.error.detail); //patch up this shit as it goes along
 
-                switch(result.error.code){
+                switch (result.error.code) {
                     case "23505":
                         console.log("email already exists");
                         return res.status(401).send("email already exists!");
@@ -205,13 +205,13 @@ app.post("/user/create", (req, res) => {
 
 })
 
-app.get("/questions", (req,res) => { //get a bunch of questions
+app.get("/questions", (req, res) => { //get a bunch of questions
 
     db.getQuestion((result) => {
         var jsonConstructed = `{"Questions" : [`
 
 
-        for(i=0; i<result.results.length; i++){
+        for (i = 0; i < result.results.length; i++) {
             jsonConstructed += JSON.stringify(result.results[i]);
             jsonConstructed += `,`
         }
@@ -225,14 +225,14 @@ app.get("/questions", (req,res) => { //get a bunch of questions
 
 })
 
-app.post("/article/create", (req,res) => {
+app.post("/article/create", (req, res) => {
     var authorId = req.body.authorId;
     var videolink = req.body.videolink;
     var title = req.body.title;
     var content = req.body.content;
 
     db.postArticle(authorId, videolink, title, content, (result) => {
-        if(result.error != null ){
+        if (result.error != null) {
             console.log("something went wrong");
             console.log(result.error);
             return res.sendStatus(400);
@@ -243,12 +243,12 @@ app.post("/article/create", (req,res) => {
 
 })
 
-app.post("/user/profile", (req,res) => { //get user from id
+app.post("/user/profile", (req, res) => { //get user from id
     var id = req.body.id;
     console.log("getting user of id " + id);
 
     db.GetUserFromId(id, (result) => {
-        if(result.error != null ){
+        if (result.error != null) {
             console.log("something went wrong");
             console.log(result.error);
             return res.sendStatus(400);
@@ -258,31 +258,42 @@ app.post("/user/profile", (req,res) => { //get user from id
     })
 })
 
-app.post("/user/profile/update",checkToken, (req,res) => { //update the user info
+app.put("/user/profile/update", checkToken, (req, res) => { //update the user info
     const id = req.body.id;
     const username = req.body.username;
     const email = req.body.email;
+    const pfp = req.body.pfp; //profile picture
     verifyJWT(req.token)
-    .then((decoded) => {
-        console.log("here");
-        //do a lil check to see if the jwt matches with the person alledgedly that is changing info
-        if(decoded.id==id && decoded.email==email){
-            console.log("verified individual");
-            res.sendStatus(200);
-        }
-        else{
-            console.log("access denied");
-            res.sendStatus(403)
-        }
-    })
+        .then((decoded) => {
+            console.log("here");
+            //do a lil check to see if the jwt matches with the person alledgedly that is changing info
+            if (decoded.id == id && decoded.email == email) {
+                console.log("verified individual");
+                db.updateProfile(id, username, (result) => {
+                    if (result.error != null) {
+                        console.log("something went wrong");
+                        console.log(result.error);
+                        return res.sendStatus(400);
+                    }
+                    generateAccessToken(id, email)
+                        .then((token) => {
+                            return res.status(202).send({ 'token': token, 'username': username, 'id': id }); //if the js sees the 202 status, keep the name in session storagee
+                        })
+                })
+            }
+            else {
+                console.log("access denied");
+                res.sendStatus(403)
+            }
+        })
 })
 
-app.post("/article", (req,res) => {
+app.post("/article", (req, res) => {
     var id = req.body.id;
     console.log(id);
 
     db.getArticle(id, (result) => {
-        if(result.error != null ){
+        if (result.error != null) {
             console.log("something went wrong");
             console.log(result.error);
             return res.sendStatus(400);
@@ -295,7 +306,7 @@ app.post("/article", (req,res) => {
 app.get("/article/sidebar", (req, res) => { //get articles summaries for sidebar
 
     db.getAllArticles((result) => {
-        if(result.error != null ){
+        if (result.error != null) {
             console.log("something went wrong");
             console.log(result.error);
             return res.sendStatus(400);
@@ -306,16 +317,16 @@ app.get("/article/sidebar", (req, res) => { //get articles summaries for sidebar
 
 })
 
-app.post("/quiz/submit", (req,res) => { //submit quiz results
+app.post("/quiz/submit", (req, res) => { //submit quiz results
     const userid = req.body.userid;
     const totalQuestions = req.body.totalQuestions;
     const correctQuestions = req.body.correctQuestions;
 
-    db.postQuizResult(userid,totalQuestions,correctQuestions, (result) => {
+    db.postQuizResult(userid, totalQuestions, correctQuestions, (result) => {
         console.log(result);
         return res.sendStatus(200);
     })
-    
+
 })
 
 

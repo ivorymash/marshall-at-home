@@ -29,6 +29,14 @@ class Database {
 
     }
 
+    updateProfile(id, username, callback) {
+        this.pool
+        .query('UPDATE users SET username = $2 WHERE id = $1', [id, username], (err, res) => {
+            if(err){return callback({'error':err,'results':null})}
+            return callback({'error':err, 'results': res.rows})
+        })
+    }
+
     getQuestion(callback) {
         this.pool
         .query(`SELECT question, id FROM "question_bank" ORDER BY random() LIMIT 5`, (err,res) => {

@@ -50,7 +50,10 @@ body {
 }
 
 .profilePicture{
+    object-fit: cover;
     border-radius: 50%;
+    height:350px;
+    width: 350px;
 }
 
 .form-group{
@@ -70,7 +73,8 @@ body {
     padding-right: 5%;
 }
 
+
 .tableWrapper{
-    height: 1px;
+     height: 1px; /*dont know why is works but if u remove it breaks */
 }
 

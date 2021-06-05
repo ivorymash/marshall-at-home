@@ -14,7 +14,7 @@ class Database {
 
     GetUserFromId(id, callback){ //gets all the user information
         this.pool
-        .query('SELECT username, email from users WHERE id = $1', [id], (err,res) => {
+        .query('SELECT username, email, profile_pic_link from users WHERE id = $1', [id], (err,res) => {
             if(err){return callback({'error':err,'results':null})}
             return callback({'error':err, 'results': res.rows})
         })
@@ -29,9 +29,9 @@ class Database {
 
     }
 
-    updateProfile(id, username, callback) {
+    updateProfile(id, username, pfp, callback) {
         this.pool
-        .query('UPDATE users SET username = $2 WHERE id = $1', [id, username], (err, res) => {
+        .query('UPDATE users SET username = $2, profile_pic_link = $3 WHERE id = $1', [id, username, pfp], (err, res) => {
             if(err){return callback({'error':err,'results':null})}
             return callback({'error':err, 'results': res.rows})
         })

@@ -52,8 +52,13 @@ function getUserInfo() {
 function updateProfile() {
     var email = document.getElementById("email").value;
     var name = document.getElementById("username").value;
-    var pfp = document.getElementById("profilePicture").value; //do nothing with this for now xd
-
+    var pfp = document.getElementById("profilePicture").value;
+    if (name == "") { //casual checking
+        var name = window.localStorage.getItem('user');
+        if (name == null) {
+            name = window.sessionStorage.getItem('user');
+        }
+    }
     var inSessionStorage = false; //sneaky little flag to use later.
 
     var jwt = window.localStorage.getItem('token');
@@ -84,7 +89,7 @@ function updateProfile() {
             sessionStorage.setItem('token', data.token); //temporary, only for current tab
             sessionStorage.setItem('user', data.username);
             sessionStorage.setItem('id', data.id);
-        }else{
+        } else {
             localStorage.setItem('token', data.token); //sets to storage, which is persistent
             localStorage.setItem('user', data.username);
             localStorage.setItem('id', data.id);
@@ -96,14 +101,17 @@ function updateProfile() {
 
 function replaceProfileFields(data) {
     console.log(data);
+    if(data.profile_pic_link !== null){
+        document.getElementById("pfp").src = data.profile_pic_link; //photo
+    }
+    document.getElementById("profilePicture").value = data.profile_pic_link;
     document.getElementById("username").value = data.username;
-
     document.getElementById("email").value = data.email;
 }
 
-function convertEpochToDate(ts){
-    var options = { weekday: 'long', month: 'long', day: 'numeric'}
-    var dateObj = new Date(ts*1000);
+function convertEpochToDate(ts) {
+    var options = { weekday: 'long', month: 'long', day: 'numeric' }
+    var dateObj = new Date(ts * 1000);
     return dateObj.toLocaleString("en-US");
 }
 

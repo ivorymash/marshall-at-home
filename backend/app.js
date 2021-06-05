@@ -269,7 +269,7 @@ app.put("/user/profile/update", checkToken, (req, res) => { //update the user in
             //do a lil check to see if the jwt matches with the person alledgedly that is changing info
             if (decoded.id == id && decoded.email == email) {
                 console.log("verified individual");
-                db.updateProfile(id, username, (result) => {
+                db.updateProfile(id, username, pfp, (result) => {
                     if (result.error != null) {
                         console.log("something went wrong");
                         console.log(result.error);

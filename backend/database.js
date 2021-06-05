@@ -47,7 +47,7 @@ class Database {
 
     getQuizHistory(userid, callback) {
         this.pool
-        .query(`SELECT * FROM "quiz_history" WHERE user_id = $1 ORDER BY time_of_quiz DESC`, [userid], (err,res) => {
+        .query(`SELECT id, total_questions, correct_questions, extract(epoch from time_of_quiz) as "time_of_quiz" FROM "quiz_history" WHERE user_id = $1 ORDER BY time_of_quiz DESC`, [userid], (err,res) => {
             if(err){return callback({'error':err,'results':null})}
             return callback({'error':err, 'results': res.rows})
         })

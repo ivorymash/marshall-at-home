@@ -26,12 +26,6 @@ body {
     top: 50%;
 }
 
-.historyCard{
-    height:95%;
-    padding-top: 2%;
-    padding-left: 5%;
-    border-radius: 10px;
-}
 
 .profileCard{
     border-radius: 10px;
@@ -67,3 +61,16 @@ body {
 .form-control{
     margin-bottom: 5%;
 }
+
+.historyCard{
+    height:100%;
+    padding-top: 2%;
+    padding-left: 5%;
+    border-radius: 10px;
+    padding-right: 5%;
+}
+
+.tableWrapper{
+    height: 1px;
+}
+

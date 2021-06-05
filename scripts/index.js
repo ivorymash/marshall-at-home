@@ -35,13 +35,3 @@ function loginBtn(isLoggedIn) {
     ).innerHTML += `<button id="signUp" onClick="signUp()">Sign Up</button>`;
   }
 }
-
-function logOut() {
-  window.localStorage.removeItem("token");
-  window.sessionStorage.removeItem("token");
-  window.localStorage.removeItem("id");
-  window.sessionStorage.removeItem("id");
-  window.localStorage.removeItem("user");
-  window.sessionStorage.removeItem("user");
-  window.location.replace("login.html");
-}

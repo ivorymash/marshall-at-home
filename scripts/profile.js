@@ -101,6 +101,11 @@ function replaceProfileFields(data) {
     document.getElementById("email").value = data.email;
 }
 
+function convertEpochToDate(ts){
+    var options = { weekday: 'long', month: 'long', day: 'numeric'}
+    var dateObj = new Date(ts*1000);
+    return dateObj.toLocaleString("en-US");
+}
 
 function generateTable(data) { //and other stuff
     username = window.localStorage.getItem("user");
@@ -108,10 +113,10 @@ function generateTable(data) { //and other stuff
         username = window.sessionStorage.getItem("user");
     }
     document.getElementById("nameOfUser").innerHTML = "Profile of " + username
-    var tablehtml = `<table> <tr> <th>Time</th> <th>Topic</th> <th>Score</th> </tr>`
+    var tablehtml = `<table class="table table-hover"> <tr> <th>Time</th> <th>Topic</th> <th>Score</th> </tr>`
     for (i = 0; i < data.length; i++) {
         tablehtml += `<tr> <th>`
-        tablehtml += data[i].time_of_quiz;
+        tablehtml += convertEpochToDate(data[i].time_of_quiz);
         tablehtml += `</th> <th>`
         if (data[i].topic == null) {
             tablehtml += "None"

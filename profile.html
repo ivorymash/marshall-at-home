@@ -66,14 +66,15 @@
                         class="mx-auto d-block img-fluid profilePicture" alt="...">
                     <div class="form-group">
                         <label for="username">Name:</label>
-                        <input id="username" type="username" class="form-control" name="username" value=""/>
+                        <input id="username" type="username" class="form-control" name="username" value="" />
                         <label for="email">Email Address:</label>
-                        <input id="email" type="email" class="form-control" name="email" readonly/>
+                        <input id="email" type="email" class="form-control" name="email" readonly />
                         <label for="profilePicture">Profile Picture Link:</label>
                         <input id="profilePicture" type="profilePicture" class="form-control" name="profilePicture" />
                     </div>
                     <div>
-                        <h1 id="updateProfile" class="btn btn-outline-warning" onclick="updateProfile()">Update Profile</h1>
+                        <h1 id="updateProfile" class="btn btn-outline-warning" onclick="updateProfile()">Update Profile
+                        </h1>
                     </div>
                     <h1 id="logOut" class="btn btn-outline-warning" onclick="logOut()">Log Out</h1>
                 </div>
@@ -83,7 +84,9 @@
                 <div class="historyCard shadow overflow-auto">
                     <h1>Quiz History</h1>
                     <div class="spinner-border text-secondary" id="loadingHistory"></div>
-                    <div id="quizHistoryTable">
+                    <div class="tableWrapper ">
+                        <div id="quizHistoryTable">
+                        </div>
                     </div>
                 </div>
 

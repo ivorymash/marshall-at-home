@@ -133,9 +133,22 @@ function loadQnType2(data) {
 
 
 function select(number) {
-    console.log(number + " selected")
-    selectedAns = number;
-    document.getElementById("selectedAns").innerHTML = number;
+    var btnContainer = document.getElementById("multipleChoiceBtns");
+    var btns = btnContainer.getElementsByClassName("answer");
+
+    if(document.getElementsByClassName("selected").length !== 0){
+        console.log("replacing old selection");
+        var current = document.getElementsByClassName("selected");
+        console.log(current[0]);
+        current[0].classList.remove("selected");
+    }
+
+    for (i = 0; i < btns.length; i++) {
+            if(i+1 == number){
+                console.log("selected button is " + (i+1));
+                btns[i].className += " selected";
+            };
+    }
 }
 
 

@@ -18,8 +18,6 @@ const jwt = require('jsonwebtoken');
 // get config vars
 dotenv.config();
 
-// access config var
-
 
 //middleware jwt authentication
 function authenticateToken(req, res, next) {

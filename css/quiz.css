@@ -5,29 +5,8 @@ body {
   z-index: 0;
 }
 
-.side-navbar {
-  width: 180px;
-  height: 100%;
-  position: fixed;
-  margin-left: -300px;
-  background-color: #100901;
-  transition: 0.5s;
-}
-
 #logInOrOut {
   margin: 0;
-}
-
-.my-container {
-  transition: 0.4s;
-}
-
-.active-nav {
-  margin-left: 0;
-}
-
-.active-cont {
-  margin-left: 180px;
 }
 
 #menu-btn {
@@ -35,8 +14,70 @@ body {
   margin-left: 20px;
 }
 
+.h-80{
+  height:80%;
+}
+
 .spinner-border{
   position: relative;
   left: 50%;
   top: 50%;
+}
+
+.questionWrapper {
+  max-height: 100%;
+  padding-left: 2%;
+  height: 80%;
+}
+
+.buttongrp{
+  width:100%;
+}
+
+.btn{
+  text-transform: none;
+  font-size: medium;
+  width:100%;
+  border: 2px solid;
+  border-color: #F29526;
+  color: #4f4f4f;
+  box-shadow: none;
+  margin-bottom: 10%;
+  border-radius: 5px;
+  padding-top: 2.5%;
+  padding-bottom: 2.5%;
+}
+
+.selectBtn{
+  margin-top: 5%;
+  width:50%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+}
+
+.bodyRow{
+  height:100%;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+.btn:hover{
+  background-color: #F29526;
+  color:white;
+}
+/* 
+.btn-outline-warning:hover{
+  background-color: #F29526;
+  color:white;
+} */
+
+.selected{
+  background-color: #F29526;
+  color:white;
+}
+
+.qnMedia {
+  object-fit: cover;
+  width: 500px;
+  height:500px;
 }

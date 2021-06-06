@@ -43,22 +43,23 @@
     </div>
   </nav>
 
-  <div class="container">
-
-    <h1>Something.</h1>
-    <h2>Question number</h2>
-
+  <div class="container shadow rounded questionWrapper">
+    <div class="spinner-border text-secondary" id="quizSpinner"></div>
     
-    <div class="spinner-border text-secondary"></div>
-    
-    <div id="checkmark"></div>
-    <div id="qnBody"></div>
+    <h4 class="qnNumbers">Question</h4>
 
-    <div class="col-md-12 text-center">
-      <button id="selectAns d-flex justify-content-center" onclick="lockQuestion()">select answer</button>
+    <div>
+      <div id="qnBody"></div>
     </div>
+
+    <div class="col-12 text-center">
+      <button type="button" class="btn selectBtn" onclick="lockQuestion()">Confirm Answer</button>
+
+  </div>
   </div>
 
+
+  <div id="checkmark"></div>
   <script>
     signInLogic();
     hideSidebarOnStart();

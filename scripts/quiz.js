@@ -4,7 +4,7 @@ var correctAns;
 var correctTally = 0;
 var currQn;
 var qnJson;
-var questionsAnsweredTrack = new Array; 
+var questionsAnsweredTrack = new Array;
 
 
 function getData() {
@@ -22,6 +22,7 @@ function getData() {
             currQn = 0;
             loadQuestionTracks();
             loadQuestion(qnJson[currQn]);
+            removeSpinner("quizSpinner");
         })
         .then(res => {
             // console.log(res.body);
@@ -47,6 +48,10 @@ function loadQuestionTracks() {
 }
 
 
+function removeSpinner(id) {
+    document.getElementById(id).style.display = "none";
+}
+
 function updateQuestionTrack() {
 
     document.getElementById("checkmark").innerHTML = questionsAnsweredTrack;
@@ -59,25 +64,25 @@ function loadQuestion(data) {
 
     if (currQn == qnJson.length) { //all questions done
         submitResults();
-    }else{
+    } else {
         updateQuestionTrack();
 
         $("#qnBody").empty(); //we should probably convert this page to use jquery tbh
-    
+
         switch (data.question.QnsType) { //TODO: add the other question types here
             case "1":
                 loadQnType1(data);
                 break;
-    
+
             case "2":
                 loadQnType2(data);
                 break;
-    
+
             default:
                 break;
-    
+
         }
-    
+
     }
 
 }
@@ -90,19 +95,28 @@ function loadQnType1(data) {
 
     qnType = "1";
 
-    var qnType1 = `<h3 id="qnText">${data.question.Question}</h3>
+    var qnType1;
+
+    qnType1 = `<h2 id="qnText">${data.question.Question}</h2>
     <div>`
 
-    //check if there is an image appended.
-    if (data.question.QnImage) {
-        console.log("image found. retrieving image");
-        qnType1 += `<img src="${data.question.QnImage}">`
-    }
+    qnType1 += `<div class="row bodyRow">
+    <div class="col-6">
+        <img src="${data.question.QnImage}"
+            class="qnMedia">
+    </div>
+    <div class="buttons col-6 align-items-center my-auto">
+    <div class="buttongrp shadow-none" id="multipleChoiceBtns">
+    `
 
     for (i = 0; i < data.question.Answers.length; i++) {
-        qnType1 += `<button onclick="select('${i + 1}')" class="answer">${data.question.Answers[i]}</button>`
+        qnType1 += `<button onclick="select(${i+1})" class="answer btn">${data.question.Answers[i]}</button>`
     }
-    qnType1 += `</div> <h2 id="selectedAns">bruh</h2>`;
+    qnType1 += `</div>
+    </div>
+    </div>`;
+
+
 
     document.getElementById("qnBody").innerHTML += qnType1;
     console.log("appending type 1 qn");
@@ -136,7 +150,7 @@ function select(number) {
     var btnContainer = document.getElementById("multipleChoiceBtns");
     var btns = btnContainer.getElementsByClassName("answer");
 
-    if(document.getElementsByClassName("selected").length !== 0){
+    if (document.getElementsByClassName("selected").length !== 0) {
         console.log("replacing old selection");
         var current = document.getElementsByClassName("selected");
         console.log(current[0]);
@@ -144,11 +158,13 @@ function select(number) {
     }
 
     for (i = 0; i < btns.length; i++) {
-            if(i+1 == number){
-                console.log("selected button is " + (i+1));
-                btns[i].className += " selected";
-            };
+        if (i + 1 == number) {
+            console.log("selected button is " + (i + 1));
+            btns[i].className += " selected";
+        };
     }
+
+    selectedAns = number;
 }
 
 
@@ -204,7 +220,7 @@ function verifyQnType2() {
         alert("right");
         questionsAnsweredTrack[currQn] = "O "
         correctTally++;
-    }else {
+    } else {
         alert("wrong");
         questionsAnsweredTrack[currQn] = "X "
     }
@@ -212,10 +228,10 @@ function verifyQnType2() {
     loadQuestion(qnJson[currQn]);
 }
 
-function submitResults(){
+function submitResults() {
 
     userid = window.localStorage.getItem("id");
-    if(userid == null) {
+    if (userid == null) {
         userid = window.sessionStorage.getItem("id");
     }
 
@@ -228,7 +244,7 @@ function submitResults(){
                 'Accept': 'application/json'
             },
             method: "POST",
-            body: JSON.stringify({ userid: userid, totalQuestions : qnJson.length, correctQuestions : correctTally})
+            body: JSON.stringify({ userid: userid, totalQuestions: qnJson.length, correctQuestions: correctTally })
         }
     )
         .then(res => {

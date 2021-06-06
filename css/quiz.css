@@ -81,3 +81,11 @@ body {
   width: 500px;
   height:500px;
 }
+
+.qnBody{
+  padding-top: 5%;
+}
+
+.qnNumbers{
+  padding-top: 2%;
+}

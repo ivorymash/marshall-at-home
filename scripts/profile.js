@@ -101,9 +101,10 @@ function updateProfile() {
 
 function replaceProfileFields(data) {
     console.log(data);
-    if(data.profile_pic_link !== null){
+    if(data.profile_pic_link !== ""){
         document.getElementById("pfp").src = data.profile_pic_link; //photo
     }
+    document.getElementById("nameOfUser").innerHTML = "Profile of " + data.username;
     document.getElementById("profilePicture").value = data.profile_pic_link;
     document.getElementById("username").value = data.username;
     document.getElementById("email").value = data.email;
@@ -120,7 +121,6 @@ function generateTable(data) { //and other stuff
     if (username == null) {
         username = window.sessionStorage.getItem("user");
     }
-    document.getElementById("nameOfUser").innerHTML = "Profile of " + username
     var tablehtml = `<table class="table table-hover"> <tr> <th>Time</th> <th>Topic</th> <th>Score</th> </tr>`
     for (i = 0; i < data.length; i++) {
         tablehtml += `<tr> <th>`

@@ -27,6 +27,7 @@ body {
 .questionWrapper {
   max-height: 100%;
   padding-left: 2%;
+  padding-right: 2%;
   height: 80%;
 }
 
@@ -49,7 +50,6 @@ body {
 }
 
 .selectBtn{
-  margin-top: 5%;
   width:50%;
   padding-top: 1%;
   padding-bottom: 1%;
@@ -78,8 +78,8 @@ body {
 
 .qnMedia {
   object-fit: cover;
-  width: 500px;
-  height:500px;
+  width: 400px;
+  height:400px;
 }
 
 .qnBody{
@@ -88,4 +88,17 @@ body {
 
 .qnNumbers{
   padding-top: 2%;
+}
+
+.qnTrack{
+  
+  padding-top: 2%;
+  text-align: right;
+}
+
+.form-control{
+  text-align: center;
+  width:40%;
+  margin-top: 5%;
+  margin-bottom: 0%;
 }

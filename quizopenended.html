@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="css/navbar.css" />
 </head>
 
-<body onload="getData()">
+<body onload="">
 
   <nav class="navbar navbar-expand-lg">
     <div class="container">
@@ -45,24 +45,29 @@
 
   <div class="container shadow rounded questionWrapper">
     <div class="spinner-border text-secondary" id="quizSpinner"></div>
-    <div class="row">
-      <div class="col-6">
-        <h4 id="qnNumbers" class="qnNumbers">Question</h4>
-      </div>
-      
-      <div class="col-6">
-        <h4 id="checkmark" class="qnTrack"></h4>
-      </div>
-    </div>
+
+    <h4 class="qnNumbers">Question</h4>
 
     <div>
-      <div id="qnBody"></div>
+      <div>
+        <div id="qnBody">
+          <h3 id="qnText" class="text-center">What do vehicles operating in the airside needasdasdasdasdasd displayed on the windscreen or prominent part
+            of it?</h3>
+            <div class="qnMedia mx-auto">
+              <img src="https://blog.commlabindia.com/wp-content/uploads/2019/07/animated-gifs-corporate-training.gif"
+                            class="qnMedia">
+            </div>
+          <div>
+            <input class="form-control mx-auto" type="text" id="selectedAns" name="answerField"><br>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="col-12 text-center">
       <button type="button" class="btn selectBtn" onclick="lockQuestion()">Confirm Answer</button>
 
-  </div>
+    </div>
   </div>
 
 

@@ -44,7 +44,6 @@ function loadQuestionTracks() {
         questionsAnsweredTrack.push("- ")
     }
     console.log("ok");
-
 }
 
 
@@ -53,8 +52,8 @@ function removeSpinner(id) {
 }
 
 function updateQuestionTrack() {
-
-    document.getElementById("checkmark").innerHTML = questionsAnsweredTrack;
+    document.getElementById("qnNumbers").innerHTML = `Question ${currQn+1} / ${qnJson.length}`
+    document.getElementById("checkmark").innerHTML = questionsAnsweredTrack.join("");
 
 }
 
@@ -129,16 +128,20 @@ function loadQnType2(data) {
     console.log(correctAns);
     console.log("loading qn type 2")
 
-    var qnType2 = `<h3 id="qnText">${data.question.Question}</h3>
-    <div>`
+    var qnType2 = `<h3 id="qnText" class="text-center">${data.question.Question}</h3>`
 
-    if (data.question.QnImage) {
-        console.log("image found. retrieving image");
-        qnType2 += `<img src="${data.question.QnImage}">`;
-    }
+    qnType2 += `<div class="qnMedia mx-auto">`
+    if(data.question.QnImage){
+        qnType2 += `    <img src="${data.question.QnImage}"
+        class="qnMedia">`
+    };
 
-    qnType2 += `<input type="text" id="selectedAns" name="answerField"><br>
-  </form></div>`
+    qnType2 += `</div>`
+
+    qnType2 += `
+    <div>
+      <input class="form-control mx-auto" type="text" id="selectedAns" name="answerField"><br>
+    </div>`
 
 
     document.getElementById("qnBody").innerHTML += qnType2;
@@ -191,11 +194,11 @@ function lockQuestion() {
 function verifyQnType1() {
     if (selectedAns == correctAns) {
         alert("right");
-        questionsAnsweredTrack[currQn] = "O "
+        questionsAnsweredTrack[currQn] = "✔️ "
         correctTally++;
     } else {
         alert("wrong");
-        questionsAnsweredTrack[currQn] = "X "
+        questionsAnsweredTrack[currQn] = "❌ "
     }
     currQn++;
     loadQuestion(qnJson[currQn]);
@@ -218,11 +221,11 @@ function verifyQnType2() {
     // isCorrect ? alert("right") : alert("wrong")
     if (isCorrect) {
         alert("right");
-        questionsAnsweredTrack[currQn] = "O "
+        questionsAnsweredTrack[currQn] = "✔️ "
         correctTally++;
     } else {
         alert("wrong");
-        questionsAnsweredTrack[currQn] = "X "
+        questionsAnsweredTrack[currQn] = "❌ "
     }
     currQn++;
     loadQuestion(qnJson[currQn]);

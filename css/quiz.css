@@ -3,6 +3,7 @@ body {
   height: 100%;
   overflow-x: hidden;
   z-index: 0;
+  background-color: #E8E8E8;
 }
 
 #logInOrOut {
@@ -29,6 +30,7 @@ body {
   padding-left: 2%;
   padding-right: 2%;
   height: 80%;
+  background-color: white;
 }
 
 .buttongrp{

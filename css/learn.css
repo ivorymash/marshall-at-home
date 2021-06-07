@@ -2,6 +2,7 @@ html,
 body {
   height: 100%;
   overflow-x: hidden;
+  background-color: #E8E8E8;
 }
 
 /* width */
@@ -23,6 +24,7 @@ body {
 
 .mainview{
     border-radius: 10px;
+    background-color: white;
 }
 
 .learnview{

@@ -2,6 +2,7 @@ html,
 body {
   height: 100%;
   overflow-x: hidden;
+  background-color: #E8E8E8;
 }
 
 /* width */
@@ -47,6 +48,7 @@ body {
 
 .shadow{
     box-shadow: 0 0 1rem rgba(0,0,0,.15)!important;
+    background-color: white;
 }
 
 .profilePicture{

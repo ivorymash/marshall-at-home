@@ -101,7 +101,7 @@ function updateProfile() {
 
 function replaceProfileFields(data) {
     console.log(data);
-    if(data.profile_pic_link !== ""){
+    if(data.profile_pic_link !== "" && data.profile_pic_link !== null){
         document.getElementById("pfp").src = data.profile_pic_link; //photo
     }
     document.getElementById("nameOfUser").innerHTML = "Profile of " + data.username;
@@ -152,5 +152,7 @@ function logOut() {
     window.sessionStorage.removeItem("id");
     window.localStorage.removeItem("user");
     window.sessionStorage.removeItem("user");
+    window.localStorage.removeItem("userType");
+    window.sessionStorage.removeItem("userType");
     window.location.replace("login.html");
 }

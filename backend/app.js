@@ -103,13 +103,14 @@ app.post("/user", (req, res) => {
                 var pass = result.results[0].password; //this is janky, there has to be a better way.
                 var username = result.results[0].username;
                 var userid = result.results[0].id;
+                var userType = result.results[0].usertype;
 
                 bcrypt.compare(password, pass, function (err, result) {
                     if (result == true) {
                         console.log("password is correct");
                         generateAccessToken(userid, email)
                             .then((token) => {
-                                return res.status(202).send({ 'token': token, 'username': username, 'id': userid }); //if the js sees the 202 status, keep the name in session storagee
+                                return res.status(202).send({ 'token': token, 'username': username, 'id': userid, 'userType' : userType}); //if the js sees the 202 status, keep the name in session storagee
                             })
                     } else {
                         console.log("bruh");
@@ -160,11 +161,20 @@ app.post("/user/profile/history", (req, res) => { //get quiz history
     });
 })
 
+app.get("/students", (req, res) => {
+
+    db.getAllStudents((result) => {
+        console.log(result);
+
+        return res.send(result.results).status(200);
+    })
+})
 //create user api
 app.post("/user/create", (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
     const email = req.body.email;
+    const userType = req.body.userType;
     console.log(username, password, email);
     //do some filtering and testing here
     if (username == null || password == null) {
@@ -174,7 +184,7 @@ app.post("/user/create", (req, res) => {
     bcrypt.hash(password, saltRounds, function (err, hash) {
         if (err) { return res.sendStatus(500) };
 
-        db.CreateUser(username, hash, email, (result) => {
+        db.CreateUser(username, hash, email, userType, (result) => {
             if (result.error != null) {
 
                 console.log("we got some shit here");

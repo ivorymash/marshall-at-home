@@ -42,6 +42,12 @@ function registerAccount() {
   var name = document.getElementById("name").value;
   var email = document.getElementById("email").value;
   var password = document.getElementById("password").value;
+  if(document.getElementById("lecturer").checked == true){
+    var userType = 2;
+  }else{
+    var userType = 1;
+  }
+  console.log(userType);
 
   fetch("http://localhost:3000/user/create",
     {
@@ -50,7 +56,7 @@ function registerAccount() {
         'Content-Type': 'application/json'
       },
       method: "POST",
-      body: JSON.stringify({ email: email, password: password, username: name })
+      body: JSON.stringify({ email: email, password: password, username: name, userType: userType })
     }).then(res => {
       if (res.status == "401") {
         alert("something u fucked up");

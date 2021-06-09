@@ -20,9 +20,9 @@ class Database {
         })
     }
 
-    CreateUser(username, password,email, callback) {
+    CreateUser(username, password,email, userType, callback) {
         this.pool
-        .query(`INSERT INTO Users (username, password, email) VALUES($1, $2, $3)`, [username, password, email], (err, res) => {
+        .query(`INSERT INTO Users (username, password, email, userType) VALUES($1, $2, $3, $4)`, [username, password, email, userType], (err, res) => {
             if(err){return callback({'error':err,'results':null})}
             return callback({'error':err, 'results': res.rows})
         })

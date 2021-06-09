@@ -10,3 +10,14 @@ body {
     border-radius: 10px;
     padding: 2%;
 }
+
+
+.btn-outline-warning{
+    border-color: #F29526;
+    color: #F29526;
+}
+
+.btn-outline-warning:hover{
+    background-color: #F29526;
+    color:white;
+}

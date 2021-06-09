@@ -9,7 +9,9 @@ function lecturerNavbar() {
   
     if (userType == 2) {
       navbar.innerHTML += `<li class="nav-item">
-      <a class="nav-link" href="students.html">View Students</a>
-    </li>` //use this to deal with the lecturer stuff.
+      <a class="nav-link" href="students.html">All Students</a>
+    </li><li class="nav-item">
+    <a class="nav-link" href="students.html">My Students</a>
+  </li>` //use this to deal with the lecturer stuff.
     }
 }

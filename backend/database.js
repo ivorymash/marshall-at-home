@@ -55,7 +55,7 @@ class Database {
 
     getAllStudents(callback) {
         this.pool
-        .query(`SELECT id, username, email, profile_pic_link from "users" WHERE usertype = 1`, (err,res) => {
+        .query(`SELECT id, username, email, profile_pic_link, supervisor_id from "users" WHERE usertype = 1`, (err,res) => {
             if(err){return callback({'error':err,'results':null})}
             return callback({'error':err, 'results': res.rows})
         })

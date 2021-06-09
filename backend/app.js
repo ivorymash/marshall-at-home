@@ -161,6 +161,14 @@ app.post("/user/profile/history", (req, res) => { //get quiz history
     });
 })
 
+app.get("/students", (req, res) => {
+
+    db.getAllStudents((result) => {
+        console.log(result);
+
+        return res.send(result.results).status(200);
+    })
+})
 //create user api
 app.post("/user/create", (req, res) => {
     const username = req.body.username;

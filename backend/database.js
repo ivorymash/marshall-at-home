@@ -53,6 +53,14 @@ class Database {
         })
     }
 
+    getAllStudents(callback) {
+        this.pool
+        .query(`SELECT id, username, email, profile_pic_link from "users" WHERE usertype = 1`, (err,res) => {
+            if(err){return callback({'error':err,'results':null})}
+            return callback({'error':err, 'results': res.rows})
+        })
+    }
+
     
     postQuizResult(userid,totalQuestions,correctQuestions, callback) {
         this.pool

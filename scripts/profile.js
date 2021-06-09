@@ -101,7 +101,7 @@ function updateProfile() {
 
 function replaceProfileFields(data) {
     console.log(data);
-    if(data.profile_pic_link !== ""){
+    if(data.profile_pic_link !== "" && data.profile_pic_link !== null){
         document.getElementById("pfp").src = data.profile_pic_link; //photo
     }
     document.getElementById("nameOfUser").innerHTML = "Profile of " + data.username;

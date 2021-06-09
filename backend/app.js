@@ -103,13 +103,14 @@ app.post("/user", (req, res) => {
                 var pass = result.results[0].password; //this is janky, there has to be a better way.
                 var username = result.results[0].username;
                 var userid = result.results[0].id;
+                var userType = result.results[0].usertype;
 
                 bcrypt.compare(password, pass, function (err, result) {
                     if (result == true) {
                         console.log("password is correct");
                         generateAccessToken(userid, email)
                             .then((token) => {
-                                return res.status(202).send({ 'token': token, 'username': username, 'id': userid }); //if the js sees the 202 status, keep the name in session storagee
+                                return res.status(202).send({ 'token': token, 'username': username, 'id': userid, 'userType' : userType}); //if the js sees the 202 status, keep the name in session storagee
                             })
                     } else {
                         console.log("bruh");

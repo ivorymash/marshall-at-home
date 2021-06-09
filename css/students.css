@@ -1,0 +1,11 @@
+html,
+body {
+  height: 100%;
+  overflow-x: hidden;
+  background-color: #E8E8E8;
+}
+
+.mainView {
+    background-color: white;
+    border-radius: 10px;
+}

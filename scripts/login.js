@@ -25,10 +25,12 @@ function signIn() {
         localStorage.setItem('token', data.token); //sets to storage, which is persistent
         localStorage.setItem('user', data.username);
         localStorage.setItem('id', data.id);
+        localStorage.setItem('userType', data.userType);
       } else {
         sessionStorage.setItem('token', data.token); //temporary, only for current tab
         sessionStorage.setItem('user', data.username);
         sessionStorage.setItem('id', data.id);
+        sessionStorage.setItem('userType', data.userType);
       }
 
       window.location.replace("index.html");

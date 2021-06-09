@@ -9,11 +9,9 @@ function signInMessage() {
 
   homeheaderStuff(signedIn);
 
-  navbar = document.getElementById("navbar");
-  navbar.innerHTML += `<li class="nav-item">
-  <a class="nav-link" href="#">Extra Things</a>
-</li>` //use this to deal with the lecturer stuff.
+
 }
+
 function homeheaderStuff(username) {
   document.getElementById("homeHeader").innerHTML = "whats good in the hood, " + username;
 }

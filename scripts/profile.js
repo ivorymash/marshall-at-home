@@ -152,5 +152,7 @@ function logOut() {
     window.sessionStorage.removeItem("id");
     window.localStorage.removeItem("user");
     window.sessionStorage.removeItem("user");
+    window.localStorage.removeItem("userType");
+    window.sessionStorage.removeItem("userType");
     window.location.replace("login.html");
 }

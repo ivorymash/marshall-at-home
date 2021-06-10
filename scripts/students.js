@@ -14,11 +14,11 @@ function getAllStudents() {
     })
 }
 
-function generateAddStudentButton(id){
+function generateAddStudentButton(id) {
     return `<td><button type="button" id="studentbtn${id}" class="btn btn-outline-warning w-80" onclick="addStudent(${id})">Add Student</button></td>`
 }
 
-function generateRemoveStudentButton(id){
+function generateRemoveStudentButton(id) {
     return `<td><button type="button" id="studentbtn${id}" class="btn btn-outline-warning w-80" onclick="removeStudent(${id})">Remove Student</button></td>`
 }
 
@@ -42,25 +42,43 @@ function populateTableAllStudent(data) {
 
 
 
-function addStudent(id){
-    userid = window.localStorage.getItem('id')??window.sessionStorage.getItem('id');
+function addStudent(id) {
+    jwt = window.localStorage.getItem('token')??window.sessionStorage.getItem('token');
+    userid = window.localStorage.getItem('id') ?? window.sessionStorage.getItem('id');
 
-    console.log(userid);
+    fetch('http://localhost:3000/students/lecturer/update'
+        , {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'authorization': `Bearer ${jwt}`
+            },
 
-//     fetch('http://localhost:3000/students/lecturer/update'
-//     , {
-//         headers: {
-//             'Content-Type': 'application/json',
-//             'Accept': 'application/json'
-//         },
-
-//         method: "POST",
-//     }
-// ).then(res => res.json()).then(data => {
-
-// })
+            method: "POST",
+            body: JSON.stringify({ studentID: id, lecturerID: userid })
+        }
+    ).then(res => {
+        console.log(res);
+    })
 }
 
-function removeStudent(id){
-    alert("removing dis bitch");
+function removeStudent(id) {
+    jwt = window.localStorage.getItem('token')??window.sessionStorage.getItem('token');
+    userid = window.localStorage.getItem('id') ?? window.sessionStorage.getItem('id');
+    console.log("removing dis bitch");
+
+    fetch('http://localhost:3000/students/lecturer/remove'
+    , {
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'authorization': `Bearer ${jwt}`
+        },
+
+        method: "POST",
+        body: JSON.stringify({ studentID: id, lecturerID: userid })
+    }
+).then(res => {
+    console.log(res);
+})
 }

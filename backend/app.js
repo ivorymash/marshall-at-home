@@ -110,7 +110,7 @@ app.post("/user", (req, res) => {
                         console.log("password is correct");
                         generateAccessToken(userid, email)
                             .then((token) => {
-                                return res.status(202).send({ 'token': token, 'username': username, 'id': userid, 'userType' : userType}); //if the js sees the 202 status, keep the name in session storagee
+                                return res.status(202).send({ 'token': token, 'username': username, 'id': userid, 'userType': userType }); //if the js sees the 202 status, keep the name in session storagee
                             })
                     } else {
                         console.log("bruh");
@@ -151,7 +151,7 @@ app.get("/token", (req, res) => {
 
 })
 
- //get quiz history
+//get quiz history
 app.post("/user/profile/history", (req, res) => {
     const userid = req.body.userid;
 
@@ -215,13 +215,64 @@ app.post("/user/create", (req, res) => {
 
 })
 
-app.post("/students/lecturer/update", (req, res) => {
+//add student to lecturer PROTECTED API
+app.post("/students/lecturer/update",checkToken, (req, res) => {
     var studentID = req.body.studentID;
     var lecturerID = req.body.lecturerID;
 
-    db.assignLecturerToStudent(studentID,lecturerID, (result) => {
-        return res.send("Updated").status(202);
-    })
+    verifyJWT(req.token)
+        .then((decoded) => {
+            console.log("here");
+            //do a lil check to see if the jwt matches with the person alledgedly that is changing info
+            if (decoded.id == lecturerID) {
+                console.log("verified individual");
+                db.assignLecturerToStudent(studentID, lecturerID, (result) => {
+                    if (result.error != null) {
+                        console.log("something went wrong");
+                        console.log(result.error);
+                        return res.sendStatus(400);
+                    }
+
+                    return res.status(202).send(`{"result" : "Updated student ${studentID}"}`);
+                })
+            }
+            else {
+                console.log("access denied");
+                res.sendStatus(403)
+            }
+        })
+
+
+})
+
+//remove student from lecturer PROTECTED API
+app.post("/students/lecturer/remove", (req, res) => {
+    var studentID = req.body.studentID;
+    var lecturerID = req.body.lecturerID;
+
+    verifyJWT(req.token)
+        .then((decoded) => {
+            console.log("here");
+            //do a lil check to see if the jwt matches with the person alledgedly that is changing info
+            if (decoded.id == lecturerID) {
+                console.log("verified individual");
+                db.removeLecturerFromStudent(studentID, (result) => {
+                    if (result.error != null) {
+                        console.log("something went wrong");
+                        console.log(result.error);
+                        return res.sendStatus(400);
+                    }
+
+                    return res.status(202).send(`{"result" : "Updated student ${studentID}"}`);
+                })
+            }
+            else {
+                console.log("access denied");
+                res.sendStatus(403)
+            }
+        })
+
+
 })
 
 app.get("/questions", (req, res) => { //get a bunch of questions
@@ -278,7 +329,7 @@ app.post("/user/profile", (req, res) => { //get user from id
 })
 
 //update the user info
-app.put("/user/profile/update", checkToken, (req, res) => { 
+app.put("/user/profile/update", checkToken, (req, res) => {
     const id = req.body.id;
     const username = req.body.username;
     const email = req.body.email;

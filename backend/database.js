@@ -45,6 +45,14 @@ class Database {
         })
     }
 
+    removeLecturerFromStudent(studentID, callback) {
+        this.pool
+        .query('UPDATE users SET supervisor_id = null WHERE id = $1', [studentID], (err, res) => {
+            if(err){return callback({'error':err,'results':null})}
+            return callback({'error':err, 'results': res.rows})
+        })
+    }
+
     getQuestion(callback) {
         this.pool
         .query(`SELECT question, id FROM "question_bank" ORDER BY random() LIMIT 5`, (err,res) => {

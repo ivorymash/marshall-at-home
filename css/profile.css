@@ -20,6 +20,10 @@ body {
     height:80%;
 }
 
+.w-80{
+    width: 80%;
+}
+
 
 .spinner-border{
     position: relative;

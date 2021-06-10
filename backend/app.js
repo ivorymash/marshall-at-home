@@ -151,7 +151,8 @@ app.get("/token", (req, res) => {
 
 })
 
-app.post("/user/profile/history", (req, res) => { //get quiz history
+ //get quiz history
+app.post("/user/profile/history", (req, res) => {
     const userid = req.body.userid;
 
     db.getQuizHistory(userid, (result) => {
@@ -169,6 +170,7 @@ app.get("/students", (req, res) => {
         return res.send(result.results).status(200);
     })
 })
+
 //create user api
 app.post("/user/create", (req, res) => {
     const username = req.body.username;
@@ -211,6 +213,15 @@ app.post("/user/create", (req, res) => {
 
     });
 
+})
+
+app.post("/students/lecturer/update", (req, res) => {
+    var studentID = req.body.studentID;
+    var lecturerID = req.body.lecturerID;
+
+    db.assignLecturerToStudent(studentID,lecturerID, (result) => {
+        return res.send("Updated").status(202);
+    })
 })
 
 app.get("/questions", (req, res) => { //get a bunch of questions
@@ -266,7 +277,8 @@ app.post("/user/profile", (req, res) => { //get user from id
     })
 })
 
-app.put("/user/profile/update", checkToken, (req, res) => { //update the user info
+//update the user info
+app.put("/user/profile/update", checkToken, (req, res) => { 
     const id = req.body.id;
     const username = req.body.username;
     const email = req.body.email;

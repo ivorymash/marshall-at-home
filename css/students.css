@@ -11,6 +11,9 @@ body {
     padding: 2%;
 }
 
+.w-80{
+    width: 80%;
+}
 
 .btn-outline-warning{
     border-color: #F29526;

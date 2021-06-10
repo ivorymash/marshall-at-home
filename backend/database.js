@@ -37,6 +37,14 @@ class Database {
         })
     }
 
+    assignLecturerToStudent(studentID, lecturerID, callback) {
+        this.pool
+        .query('UPDATE users SET supervisor_id = $1 WHERE id = $2', [lecturerID, studentID], (err, res) => {
+            if(err){return callback({'error':err,'results':null})}
+            return callback({'error':err, 'results': res.rows})
+        })
+    }
+
     getQuestion(callback) {
         this.pool
         .query(`SELECT question, id FROM "question_bank" ORDER BY random() LIMIT 5`, (err,res) => {
@@ -55,7 +63,8 @@ class Database {
 
     getAllStudents(callback) {
         this.pool
-        .query(`SELECT id, username, email, profile_pic_link, supervisor_id from "users" WHERE usertype = 1`, (err,res) => {
+        .query(`SELECT T1.id, T1.username, T1.email, T1.profile_pic_link, T1.supervisor_id, T2.username as "lecturer_name" FROM users T1 
+        LEFT JOIN users T2 on T1.supervisor_id = T2.id WHERE T1.userType = 1 ORDER BY T1.id`, (err,res) => {
             if(err){return callback({'error':err,'results':null})}
             return callback({'error':err, 'results': res.rows})
         })

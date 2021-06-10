@@ -1,11 +1,8 @@
 function signInMessage() {
   // document.cookie = "user=Yourmother";
   console.log("doing this");
-  var signedIn = window.sessionStorage.getItem("user");
 
-  if (signedIn == null) {
-    signedIn = window.localStorage.getItem("user");
-  }
+  var signedIn = window.sessionStorage.getItem("user")??window.localStorage.getItem("user");
 
   homeheaderStuff(signedIn);
 

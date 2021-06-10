@@ -233,10 +233,7 @@ function verifyQnType2() {
 
 function submitResults() {
 
-    userid = window.localStorage.getItem("id");
-    if (userid == null) {
-        userid = window.sessionStorage.getItem("id");
-    }
+    userid = window.localStorage.getItem("id")??window.sessionStorage.getItem("id");
 
     console.log(correctTally);
 

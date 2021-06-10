@@ -1,10 +1,7 @@
 
 
 function getHistory() {
-    userid = window.localStorage.getItem('id');
-    if (userid == null) {
-        userid = window.sessionStorage.getItem('id');
-    }
+    userid = window.localStorage.getItem('id')??window.sessionStorage.getItem('id');
     removeSpinner("loadingProfile"); //delete this soon
     console.log(userid);
 
@@ -26,10 +23,7 @@ function getHistory() {
 }
 
 function getUserInfo() {
-    userid = window.localStorage.getItem('id');
-    if (userid == null) {
-        userid = window.sessionStorage.getItem('id');
-    }
+    userid = window.localStorage.getItem('id')??window.sessionStorage.getItem('id');
     removeSpinner("loadingProfile");
     console.log(userid);
 
@@ -54,10 +48,7 @@ function updateProfile() {
     var name = document.getElementById("username").value;
     var pfp = document.getElementById("profilePicture").value;
     if (name == "") { //casual checking
-        var name = window.localStorage.getItem('user');
-        if (name == null) {
-            name = window.sessionStorage.getItem('user');
-        }
+        var name = window.localStorage.getItem('user')??window.sessionStorage.getItem('user');
     }
     var inSessionStorage = false; //sneaky little flag to use later.
 
@@ -67,10 +58,8 @@ function updateProfile() {
         inSessionStorage = true;
     }
 
-    var id = window.localStorage.getItem('id');
-    if (id == null) {
-        id = window.sessionStorage.getItem('id');
-    }
+    var id = window.localStorage.getItem('id')??window.sessionStorage.getItem('id');
+
 
     fetch('http://localhost:3000/user/profile/update'
         , {
@@ -117,10 +106,8 @@ function convertEpochToDate(ts) {
 }
 
 function generateTable(data) { //and other stuff
-    username = window.localStorage.getItem("user");
-    if (username == null) {
-        username = window.sessionStorage.getItem("user");
-    }
+    username = window.localStorage.getItem("user")??window.sessionStorage.getItem("user");
+
     var tablehtml = `<table class="table table-hover"> <tr> <th>Time</th> <th>Topic</th> <th>Score</th> </tr>`
     for (i = 0; i < data.length; i++) {
         tablehtml += `<tr> <th>`

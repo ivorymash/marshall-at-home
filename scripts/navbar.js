@@ -1,9 +1,6 @@
 function lecturerNavbar() {
 
-    var userType = window.localStorage.getItem('userType');
-    if (userType == null) {
-      userType = window.sessionStorage.getItem('userType');
-    }
+    var userType = window.localStorage.getItem('userType')??window.sessionStorage.getItem('userType');
 
     navbar = document.getElementById("navbar");
   

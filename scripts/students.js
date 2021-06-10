@@ -29,7 +29,7 @@ function populateTableAllStudent(data) {
         tableHTML += `<th>${data[i].id}</th>`;
         tableHTML += `<td>${data[i].username}</td>`;
         tableHTML += `<td>${data[i].email}</td>`;
-        tableHTML += `<td>${data[i].lecturer_name ?? 'none'}</td>`; //NULLISH COEASCLINASIDNSA OPERATOR BABEY
+        tableHTML += `<td id="lecturerColumnId${data[i].id}">${data[i].lecturer_name ?? 'none'}</td>`; //NULLISH COEASCLINASIDNSA OPERATOR BABEY
         if (data[i].supervisor_id == null || data[i].supervisor_id == "") { //stuff
             tableHTML += generateAddStudentButton(data[i].id);
         }
@@ -43,20 +43,22 @@ function populateTableAllStudent(data) {
 
 
 function addStudent(id){
-    document.getElementById
-    fetch('http://localhost:3000/students'
-    , {
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        },
+    userid = window.localStorage.getItem('id')??window.sessionStorage.getItem('id');
 
-        method: "GET",
-    }
-).then(res => res.json()).then(data => {
-    console.log(data);
-    populateTableAllStudent(data);
-})
+    console.log(userid);
+
+//     fetch('http://localhost:3000/students/lecturer/update'
+//     , {
+//         headers: {
+//             'Content-Type': 'application/json',
+//             'Accept': 'application/json'
+//         },
+
+//         method: "POST",
+//     }
+// ).then(res => res.json()).then(data => {
+
+// })
 }
 
 function removeStudent(id){

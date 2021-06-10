@@ -49,17 +49,24 @@ app.use(express.json());
  */
 
 const checkToken = (req, res, next) => {
+    console.log("here");
     const header = req.headers['authorization'];
 
-    if (typeof header !== 'undefined') {
+    if (header !== 'undefined') {
         const bearer = header.split(' ');
         const token = bearer[1];
+        console.log(token);
+
+        if (token == 'undefined') {
+            console.log("no jwt provided");
+            return res.sendStatus(403);
+        }
 
         req.token = token;
         next();
     } else {
         //If header is undefined return Forbidden (403)
-        res.sendStatus(403)
+        return res.sendStatus(403)
     }
 }
 
@@ -216,7 +223,7 @@ app.post("/user/create", (req, res) => {
 })
 
 //add student to lecturer PROTECTED API
-app.post("/students/lecturer/update",checkToken, (req, res) => {
+app.post("/students/lecturer/update", checkToken, (req, res) => {
     var studentID = req.body.studentID;
     var lecturerID = req.body.lecturerID;
 
@@ -271,9 +278,36 @@ app.post("/students/lecturer/remove", (req, res) => {
                 res.sendStatus(403)
             }
         })
+})
 
+app.post("/students/myStudents", checkToken, (req, res) => {
+    var id = req.body.id;
+    console.log(id);
+
+    verifyJWT(req.token)
+        .then((decoded) => {
+            //do a lil check to see if the jwt matches with the person alledgedly that is changing info
+            if (decoded.id == id) {
+                console.log("verified individual");
+                db.getMyStudents(id, (result) => {
+                    if (result.error != null) {
+                        console.log("something went wrong");
+                        console.log(result.error);
+                        return res.sendStatus(400);
+                    }
+
+                    return res.status(202).send(result.results);
+                })
+            }
+            else {
+                console.log("access denied");
+                res.sendStatus(403)
+            }
+        })
 
 })
+
+
 
 app.get("/questions", (req, res) => { //get a bunch of questions
 

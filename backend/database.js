@@ -53,6 +53,14 @@ class Database {
         })
     }
 
+    getMyStudents(id, callback){
+        this.pool
+        .query('SELECT id, username, email, profile_pic_link from users WHERE supervisor_id = $1', [id], (err,res) => {
+            if(err){return callback({'error':err,'results':null})}
+            return callback({'error':err, 'results': res.rows})
+        })
+    }
+
     getQuestion(callback) {
         this.pool
         .query(`SELECT question, id FROM "question_bank" ORDER BY random() LIMIT 5`, (err,res) => {

@@ -16,6 +16,7 @@ body {
 }
 
 .btn-outline-warning{
+    background-color: white;
     border-color: #F29526;
     color: #F29526;
 }

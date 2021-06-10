@@ -8,7 +8,7 @@ function lecturerNavbar() {
       navbar.innerHTML += `<li class="nav-item">
       <a class="nav-link" href="students.html">All Students</a>
     </li><li class="nav-item">
-    <a class="nav-link" href="students.html">My Students</a>
+    <a class="nav-link" href="mystudents.html">My Students</a>
   </li>` //use this to deal with the lecturer stuff.
     }
 }

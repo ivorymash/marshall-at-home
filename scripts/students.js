@@ -40,10 +40,8 @@ function populateTableAllStudent(data) {
     document.getElementById("allStudentsTableBody").innerHTML = tableHTML;
 }
 
-
-
 function addStudent(id) {
-    jwt = window.localStorage.getItem('token')??window.sessionStorage.getItem('token');
+    jwt = window.localStorage.getItem('token') ?? window.sessionStorage.getItem('token');
     userid = window.localStorage.getItem('id') ?? window.sessionStorage.getItem('id');
 
     fetch('http://localhost:3000/students/lecturer/update'
@@ -63,22 +61,45 @@ function addStudent(id) {
 }
 
 function removeStudent(id) {
-    jwt = window.localStorage.getItem('token')??window.sessionStorage.getItem('token');
+    jwt = window.localStorage.getItem('token') ?? window.sessionStorage.getItem('token');
     userid = window.localStorage.getItem('id') ?? window.sessionStorage.getItem('id');
     console.log("removing dis bitch");
 
     fetch('http://localhost:3000/students/lecturer/remove'
-    , {
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'authorization': `Bearer ${jwt}`
-        },
+        , {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'authorization': `Bearer ${jwt}`
+            },
 
-        method: "POST",
-        body: JSON.stringify({ studentID: id, lecturerID: userid })
-    }
-).then(res => {
-    console.log(res);
-})
+            method: "POST",
+            body: JSON.stringify({ studentID: id, lecturerID: userid })
+        }
+    ).then(res => {
+        console.log(res);
+    })
+}
+
+//my students
+
+function getMyStudents() {
+    var jwt = window.localStorage.getItem('token') ?? window.sessionStorage.getItem('token');
+    var id = window.localStorage.getItem('id') ?? window.sessionStorage.getItem('id');
+
+    fetch('http://localhost:3000/students/mystudents'
+        , {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'authorization': `Bearer ${jwt}`
+            },
+
+            method: "POST",
+            body: JSON.stringify({id: id })
+        }
+    ).then(res => res.json()).then(data => {
+        console.log(data);
+    })
+
 }

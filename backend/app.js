@@ -111,13 +111,14 @@ app.post("/user", (req, res) => {
                 var username = result.results[0].username;
                 var userid = result.results[0].id;
                 var userType = result.results[0].usertype;
+                var pfp = result.results[0].profile_pic_link;
 
                 bcrypt.compare(password, pass, function (err, result) {
                     if (result == true) {
                         console.log("password is correct");
                         generateAccessToken(userid, email)
                             .then((token) => {
-                                return res.status(202).send({ 'token': token, 'username': username, 'id': userid, 'userType': userType }); //if the js sees the 202 status, keep the name in session storagee
+                                return res.status(202).send({ 'token': token, 'username': username, 'id': userid, 'userType': userType, 'profile_pic_link': pfp}); //if the js sees the 202 status, keep the name in session storagee
                             })
                     } else {
                         console.log("bruh");

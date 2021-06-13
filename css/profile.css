@@ -2,86 +2,106 @@ html,
 body {
   height: 100%;
   overflow-x: hidden;
-  background-color: #E8E8E8;
+  background-color: #e8e8e8;
 }
 
 /* width */
 ::-webkit-scrollbar {
-    width: 5px;
-  }
-  
-  /* Handle */
+  width: 5px;
+}
+
+/* Handle */
 ::-webkit-scrollbar-thumb {
-    background: #F29526;
-    border-radius: 5px;
+  background: #f29526;
+  border-radius: 5px;
 }
 
-.h-80{
-    height:80%;
+.h-80 {
+  height: 80%;
 }
 
-.w-80{
-    width: 80%;
+.w-80 {
+  width: 80%;
 }
 
-
-.spinner-border{
-    position: relative;
-    left: 50%;
-    top: 50%;
+.spinner-border {
+  position: relative;
+  left: 50%;
+  top: 50%;
 }
 
-
-.profileCard{
-    border-radius: 10px;
-    padding-top: 4%;
-    padding-left: 5%;    
-    padding-right: 5%;
+.profileCard {
+  border-radius: 10px;
+  padding: 4% 5% 3% 5%;
 }
 
-
-.btn-outline-warning{
-    border-color: #F29526;
-    color: #F29526;
+.btn-outline-warning {
+  border-color: #f29526;
+  color: #f29526;
 }
 
-.btn-outline-warning:hover{
-    background-color: #F29526;
-    color:white;
+.btn-outline-warning:hover {
+  background-color: #f29526;
+  color: white;
 }
 
-.shadow{
-    box-shadow: 0 0 1rem rgba(0,0,0,.15)!important;
-    background-color: white;
+.shadow {
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.15) !important;
+  background-color: white;
 }
 
-.profilePicture{
-    object-fit: cover;
-    border-radius: 50%;
-    height:350px;
-    width: 350px;
+.profilePicture {
+  object-fit: cover;
+  border-radius: 50%;
+  height: 350px;
+  width: 350px;
 }
 
-.form-group{
-    padding-top: 5%;
-    padding-bottom: 5%;
+.form-group {
+  padding-top: 5%;
+  padding-bottom: 5%;
 }
 
-.form-control{
-    margin-bottom: 5%;
+.form-control {
+  margin-bottom: 5%;
 }
 
-.historyCard{
-    height:100%;
-    padding-top: 2%;
-    padding-left: 5%;
-    border-radius: 10px;
-    padding-right: 5%;
+.historyCard {
+  height: 100%;
+  padding-top: 2%;
+  padding-left: 5%;
+  border-radius: 10px;
+  padding-right: 5%;
 }
 
-
-.tableWrapper{
-    min-height: 700px;
-     height: 1px; /*dont know why is works but if u remove it breaks */
+.tableWrapper {
+  min-height: 700px;
+  height: 1px; /*dont know why is works but if u remove it breaks */
 }
 
+@media screen and (max-width: 1199px) {
+    .historyView {
+        margin: 5% 0% 5% 0%;
+    }
+    .profileCard {
+        margin: 5% 0% 0% 0%;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .historyView {
+        margin: 5% 0% 5% 0%;
+    }
+    .profileCard {
+        margin: 5% 0% 0% 0%;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .historyView {
+        margin: 5% 0% 5% 0%;
+    }
+    .profileCard {
+        margin: 5% 0% 0% 0%;
+    }
+}

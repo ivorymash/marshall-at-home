@@ -31,7 +31,7 @@ function populateTableAllStudent(data) {
     tableHTML += `<td>${data[i].email}</td>`;
     tableHTML += `<td id="lecturerColumnId${data[i].id}">${
       data[i].lecturer_name ?? "none"
-    }</td>`; //NULLISH COEASCLINASIDNSA OPERATOR BABEY
+      }</td>`; //NULLISH COEASCLINASIDNSA OPERATOR BABEY
     if (data[i].supervisor_id == null || data[i].supervisor_id == "") {
       //stuff
       tableHTML += generateAddStudentButton(data[i].id);
@@ -104,7 +104,6 @@ function getMyStudents() {
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
-      populateTableMyStudent(data);
     });
 }
 

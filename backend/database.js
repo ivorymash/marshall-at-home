@@ -55,7 +55,7 @@ class Database {
 
     getMyStudents(id, callback){
         this.pool
-        .query(`SELECT T1.id, T1.username, T1.email, T1.profile_pic_link, COUNT(T2) as "Quizzes Taken", CAST( (CAST(SUM(T2.correct_questions) AS float) / CAST(SUM(T2.total_questions) AS FLOAT) * 100) AS float)::numeric(10,2)  as "percentage", SUM(T2.correct_questions) as "Correct", SUM(T2.total_questions) as "Total" 
+        .query(`SELECT T1.id, T1.username, T1.email, T1.profile_pic_link, COUNT(T2) as "quizzes_taken", CAST( (CAST(SUM(T2.correct_questions) AS float) / CAST(SUM(T2.total_questions) AS FLOAT) * 100) AS float)::numeric(10,2)  as "percentage", SUM(T2.correct_questions) as "Correct", SUM(T2.total_questions) as "Total" 
         FROM users T1 LEFT JOIN quiz_history T2 on T1.id = T2.user_id WHERE T1.supervisor_id= $1 GROUP BY T1.id ORDER BY T1.id `, [id], (err,res) => {
             if(err){return callback({'error':err,'results':null})}
             return callback({'error':err, 'results': res.rows})

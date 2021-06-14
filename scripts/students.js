@@ -104,6 +104,7 @@ function getMyStudents() {
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
+      populateTableMyStudent(data);
     });
 }
 
@@ -114,10 +115,8 @@ function populateTableMyStudent(data) {
     tableHTML += `<th>${data[i].id}</th>`;
     tableHTML += `<td>${data[i].username}</td>`;
     tableHTML += `<td>${data[i].email}</td>`;
-    if (data[i].supervisor_id == null || data[i].supervisor_id == "") {
-      //stuff
-      tableHTML += generateRemoveStudentButton(data[i].id);
-    }
+    tableHTML += `<td>${data[i].quizzes_taken}</td>`;
+    tableHTML += `<td>${Math.floor(data[i].percentage)??"0"}%</td>`;
   }
   document.getElementById("allStudentsTableBody").innerHTML = tableHTML;
 }

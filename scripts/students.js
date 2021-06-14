@@ -64,11 +64,8 @@ function addStudent(id) {
 }
 
 function removeStudent(id) {
-  jwt =
-    window.localStorage.getItem("token") ??
-    window.sessionStorage.getItem("token");
-  userid =
-    window.localStorage.getItem("id") ?? window.sessionStorage.getItem("id");
+  jwt = window.localStorage.getItem("token") ?? window.sessionStorage.getItem("token");
+  userid = window.localStorage.getItem("id") ?? window.sessionStorage.getItem("id");
   console.log("removing dis bitch");
 
   fetch("http://localhost:3000/students/lecturer/remove", {

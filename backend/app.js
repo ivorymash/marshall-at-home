@@ -253,7 +253,7 @@ app.post("/students/lecturer/update", checkToken, (req, res) => {
 })
 
 //remove student from lecturer PROTECTED API
-app.post("/students/lecturer/remove", (req, res) => {
+app.post("/students/lecturer/remove", checkToken, (req, res) => {
     var studentID = req.body.studentID;
     var lecturerID = req.body.lecturerID;
 

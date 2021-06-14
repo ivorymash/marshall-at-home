@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg" href="/images/favicon.jpg">
     <title>Marshall@Home &mdash; Quiz</title>
 
     <!--CSS-->
@@ -23,24 +24,46 @@
 <body>
 
     <nav class="navbar navbar-expand-lg">
-        <div class="container h-80">
-            <div class="navbar-brand">
-                <a href="index.html">
-                    <img class="logo" src="/images/logoicon.png" alt="Marshalling@Home!">
-                </a>
-            </div>
-            <ul class="navbar-nav" id="navbar">
-                <li class="nav-item">
-                    <a class="nav-link" href="learn.html">Learn</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="quiz.html">Quiz</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="profile.html">Profile</a>
-                </li>
-            </ul>
+      <div class="container">
+        <div class="navbar-brand">
+          <a href="index.html">
+            <img
+              class="logo"
+              src="/images/logoicon.png"
+              alt="Marshalling@Home!"
+            />
+          </a>
         </div>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarToggler"
+          aria-controls="navbarTogglerDemo01"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <div
+          class="collapse navbar-collapse justify-content-end"
+          id="navbarToggler"
+        >
+          <ul class="navbar-nav" id="navbar">
+            <li class="nav-item">
+              <a class="nav-link" href="learn.html">Learn</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="quiz.html">Quiz</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="profile.html">Profile</a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </nav>
 
     <div class="container shadow rounded questionWrapper">

@@ -29,6 +29,22 @@ class Database {
 
     }
 
+    StoreUserBiometrics(id, standing_reach, height, wingspan, callback){
+        this.pool
+        .query(`INSERT INTO user_biometrics(user_id,wingspan,height,standing_reach) VALUES($1,$2,$3,$4) ON CONFLICT (user_id) DO UPDATE SET wingspan = $2, height=$3, standing_reach=$4`, [id,wingspan,height,standing_reach], (err,res) => {
+            if(err){return callback({'error':err,'results':null})}
+            return callback({'error':err, 'results': res.rows})
+        })
+    }
+
+    GetUserBiometrics(id ,callback){
+        this.pool
+        .query(`SELECT * from user_biometrics WHERE user_id=$1`, [id], (err,res) => {
+            if(err){return callback({'error':err,'results':null})}
+            return callback({'error':err, 'results': res.rows})
+        })
+    }
+
     updateProfile(id, username, pfp, callback) {
         this.pool
         .query('UPDATE users SET username = $2, profile_pic_link = $3 WHERE id = $1', [id, username, pfp], (err, res) => {

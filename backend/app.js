@@ -179,6 +179,43 @@ app.get("/students", (req, res) => {
     })
 })
 
+app.post("/user/biometrics/create", (req,res) =>{ //set user biometrics
+    console.log("ok");
+    const id = req.body.userid;
+    const height = req.body.height;
+    const standing_reach = req.body.standing_reach;
+    const wingspan = req.body.wingspan;
+
+    console.log(id,height,standing_reach,wingspan)
+
+    db.StoreUserBiometrics(id, standing_reach, height, wingspan, (result) => {
+        if (result.error != null) {
+            console.log("we got some shit here");
+            console.log(result.error); //patch up this shit as it goes along
+            return res.sendStatus(500);
+        } else {
+            console.log(result);
+            console.log("created!");
+            return res.sendStatus(201);
+        }
+    })
+})
+
+app.get("/user/biometrics", (req,res) =>{ //set user biometrics
+    const id = req.body.userid;
+
+    db.GetUserBiometrics(id, (result) => {
+        if (result.error != null) {
+            console.log("we got some shit here");
+            console.log(result.error); //patch up this shit as it goes along
+            return res.sendStatus(500);
+        } else {
+            console.log(result);
+            return res.send(result.results).status(200);
+        }
+    })
+})
+
 //create user api
 app.post("/user/create", (req, res) => {
     const username = req.body.username;

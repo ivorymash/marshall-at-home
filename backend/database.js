@@ -45,9 +45,9 @@ class Database {
         })
     }
 
-    updateProfile(id, username, pfp, callback) {
+    updateProfile(id, username, pfp, email, callback) {
         this.pool
-        .query('UPDATE users SET username = $2, profile_pic_link = $3 WHERE id = $1', [id, username, pfp], (err, res) => {
+        .query('UPDATE users SET username = $2, profile_pic_link = $3, email = $4 WHERE id = $1', [id, username, pfp, email], (err, res) => {
             if(err){return callback({'error':err,'results':null})}
             return callback({'error':err, 'results': res.rows})
         })

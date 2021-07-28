@@ -92,8 +92,7 @@ async function generateAccessToken(id, email, userType) {
 // decodes available jwt token
 async function verifyJWT(token) {
     // decoded contains id, email and userType
-  const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
-  console.log(decoded);
+  const decoded = await jwt.verify(token, process.env.TOKEN_SECRET);
   return decoded;
 }
 
@@ -299,7 +298,7 @@ app.post("/user/create", (req, res) => {
             switch (result.error.code) {
               case "23505":
                 console.log("email already exists");
-                return res.status(401).send("email already exists!");
+                return res.status(401).send({message: "email already exists!"});
                 break;
 
               default:
@@ -338,7 +337,9 @@ app.post("/students/lecturer/update", checkToken, (req, res) => {
                         return res.sendStatus(400);
                     }
                     console.log("Added student")
-                    return res.status(202).send(`{"result" : "Updated student ${studentID}"}`);
+                    return res
+                      .status(202)
+                      .send({ result: "Added student " + studentID });
                 });
             }
             else {
@@ -369,7 +370,7 @@ app.post("/students/lecturer/remove", checkToken, (req, res) => {
                         return res.sendStatus(400);
                     }
 
-                    return res.status(202).send(`{"result" : "Updated student ${studentID}"}`);
+                    return res.status(202).send({"result" : "Removed student " + studentID});
                 });
             }
             else {
@@ -583,4 +584,4 @@ function tearDown() {
  *  Create a new file (e.g. server.js) which imports app from this file and run it in server.js
  */
 
-module.exports = { app, tearDown }; // DO NOT DELETE
+module.exports = { app, generateAccessToken, verifyJWT, tearDown }; // DO NOT DELETE

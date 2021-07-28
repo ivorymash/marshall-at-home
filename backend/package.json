@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon server.js",
     "jest": "jest",
-    "test": "NODE_ENV=test mocha"
+    "test": "NODE_ENV=test mocha || mocha"
   },
   "author": "",
   "license": "ISC",

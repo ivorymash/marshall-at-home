@@ -1,3 +1,9 @@
 {
-    "liveServer.settings.port": 5501
+    "liveServer.settings.port": 5501,
+    // default comment colors suck lmao
+    "editor.tokenColorCustomizations": {
+        "[Dracula]": {
+            "comments": "#ffd1dc"
+        }
+    },
 }

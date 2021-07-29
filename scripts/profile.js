@@ -1,19 +1,23 @@
 
 
 function getHistory() {
-    userid = window.localStorage.getItem('id')??window.sessionStorage.getItem('id');
+    jwt =
+      window.localStorage.getItem("token") ??
+      window.sessionStorage.getItem("token");
+    // userid = window.localStorage.getItem('id')??window.sessionStorage.getItem('id');
     removeSpinner("loadingProfile"); //delete this soon
-    console.log(userid);
+    // console.log(userid);
 
     fetch('http://localhost:3000/user/profile/history'
         , {
             headers: {
                 'Content-Type': 'application/json',
-                'Accept': 'application/json'
+                'Accept': 'application/json',
+                "authorization": `Bearer ${jwt}`,
             },
 
-            method: "POST",
-            body: JSON.stringify({ userid: userid })
+            method: "GET",
+            // body: JSON.stringify({ userid: userid })
         }
     ).then(res => res.json()).then(data => {
         generateTable(data);
@@ -23,19 +27,23 @@ function getHistory() {
 }
 
 function getUserInfo() {
-    userid = window.localStorage.getItem('id')??window.sessionStorage.getItem('id');
+    jwt =
+      window.localStorage.getItem("token") ??
+      window.sessionStorage.getItem("token");
+    // userid = window.localStorage.getItem('id')??window.sessionStorage.getItem('id');
     removeSpinner("loadingProfile");
-    console.log(userid);
+    // console.log(userid);
 
     fetch('http://localhost:3000/user/profile'
         , {
             headers: {
                 'Content-Type': 'application/json',
-                'Accept': 'application/json'
+                'Accept': 'application/json',
+                "authorization": `Bearer ${jwt}`,
             },
 
-            method: "POST",
-            body: JSON.stringify({ id: userid })
+            method: "GET",
+            // body: JSON.stringify({ id: userid })
         }
     ).then(res => res.json()).then(data => {
         replaceProfileFields(data[0]);
@@ -58,7 +66,7 @@ function updateProfile() {
         inSessionStorage = true;
     }
 
-    var id = window.localStorage.getItem('id')??window.sessionStorage.getItem('id');
+    // var id = window.localStorage.getItem('id')??window.sessionStorage.getItem('id');
 
 
     fetch('http://localhost:3000/user/profile/update'
@@ -70,24 +78,25 @@ function updateProfile() {
             },
 
             method: "PUT",
-            body: JSON.stringify({ username: name, email: email, pfp: pfp, id: id })
+            body: JSON.stringify({ username: name, email: email, pfp: pfp})
         }
     ).then(res => res.json()).then(data => {
         console.log(data);
         if (inSessionStorage) {
             sessionStorage.setItem('token', data.token); //temporary, only for current tab
             sessionStorage.setItem('user', data.username);
-            sessionStorage.setItem('id', data.id);
+            // sessionStorage.setItem('id', data.id);
         } else {
             localStorage.setItem('token', data.token); //sets to storage, which is persistent
             localStorage.setItem('user', data.username);
-            localStorage.setItem('id', data.id);
+            // localStorage.setItem('id', data.id);
         }
         location.reload();
     });
 
 }
 
+// TODO: Create an API to call for user's detials
 function replaceProfileFields(data) {
     console.log(data);
     if(data.profile_pic_link !== "" && data.profile_pic_link !== null){
@@ -135,11 +144,11 @@ function removeSpinner(id) {
 function logOut() {
     window.localStorage.removeItem("token");
     window.sessionStorage.removeItem("token");
-    window.localStorage.removeItem("id");
-    window.sessionStorage.removeItem("id");
+    // window.localStorage.removeItem("id");
+    // window.sessionStorage.removeItem("id");
     window.localStorage.removeItem("user");
     window.sessionStorage.removeItem("user");
-    window.localStorage.removeItem("userType");
-    window.sessionStorage.removeItem("userType");
-    window.location.replace("login.html");
+    // window.localStorage.removeItem("userType");
+    // window.sessionStorage.removeItem("userType");
+    window.location.replace("index.html");
 }

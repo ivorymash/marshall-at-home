@@ -1,8 +1,12 @@
 function getAllStudents() {
+  jwt =
+    window.localStorage.getItem("token") ??
+    window.sessionStorage.getItem("token");
   fetch("http://localhost:3000/students", {
     headers: {
       "Content-Type": "application/json",
-      Accept: "application/json",
+      "Accept": "application/json",
+      "authorization": `Bearer ${jwt}`,
     },
 
     method: "GET",
@@ -11,7 +15,7 @@ function getAllStudents() {
     .then((data) => {
       console.log(data);
       populateTableAllStudent(data);
-    });
+    }).catch(() => window.location.replace("404.html"));
 }
 
 function generateAddStudentButton(id) {
@@ -46,8 +50,6 @@ function addStudent(id) {
   jwt =
     window.localStorage.getItem("token") ??
     window.sessionStorage.getItem("token");
-  userid =
-    window.localStorage.getItem("id") ?? window.sessionStorage.getItem("id");
 
   fetch("http://localhost:3000/students/lecturer/update", {
     headers: {
@@ -57,7 +59,8 @@ function addStudent(id) {
     },
 
     method: "POST",
-    body: JSON.stringify({ studentID: id, lecturerID: userid }),
+    // removed lecturer's id, use on backend instead
+    body: JSON.stringify({ studentID: id}),
   }).then((res) => {
     console.log(res);
   });
@@ -65,7 +68,7 @@ function addStudent(id) {
 
 function removeStudent(id) {
   jwt = window.localStorage.getItem("token") ?? window.sessionStorage.getItem("token");
-  userid = window.localStorage.getItem("id") ?? window.sessionStorage.getItem("id");
+  // userid = window.localStorage.getItem("id") ?? window.sessionStorage.getItem("id");
   console.log("removing dis bitch");
 
   fetch("http://localhost:3000/students/lecturer/remove", {
@@ -76,10 +79,11 @@ function removeStudent(id) {
     },
 
     method: "POST",
-    body: JSON.stringify({ studentID: id, lecturerID: userid }),
+    body: JSON.stringify({ studentID: id}),
   }).then((res) => {
     console.log(res);
   });
+  // window.location.reload();
 }
 
 //my students
@@ -88,8 +92,8 @@ function getMyStudents() {
   var jwt =
     window.localStorage.getItem("token") ??
     window.sessionStorage.getItem("token");
-  var id =
-    window.localStorage.getItem("id") ?? window.sessionStorage.getItem("id");
+  // var id =
+  //   window.localStorage.getItem("id") ?? window.sessionStorage.getItem("id");
 
   fetch("http://localhost:3000/students/mystudents", {
     headers: {
@@ -99,13 +103,14 @@ function getMyStudents() {
     },
 
     method: "POST",
-    body: JSON.stringify({ id: id }),
+    // body: JSON.stringify({ id: id }),
   })
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
       populateTableMyStudent(data);
-    });
+    })
+    .catch(() => window.location.replace("404.html"));
 }
 
 function populateTableMyStudent(data) {

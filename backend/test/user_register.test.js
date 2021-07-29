@@ -7,7 +7,6 @@ const app = require("../app");
 describe("Testing POSTS SUCCESSFUL /user/create endpoint", () => {
   it("creates user with email, password, username and usertype", async () => {
     var randomNumber = Math.floor(Math.random() * 934823);
-    console.log(randomNumber);
     const response = await request.post("/user/create").send({
       username: "testing2",
       password: "mrsexy",

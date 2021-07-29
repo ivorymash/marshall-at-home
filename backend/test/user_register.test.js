@@ -4,18 +4,20 @@ const app = require("../app");
 
 // Comment in at the end
 // ! MAKE SURE TO CHANGE EMAIL AFTER EACH TEST TO ENSURE TESTING IS SUCCESSFUL
-// describe("Testing POSTS SUCCESSFUL /user/create endpoint", () => {
-//   it("creates user with email, password, username and usertype", async () => {
-//     const response = await request.post("/user/create").send({
-//       username: "testing2",
-//       password: "mrsexy",
-//       email: "sexybeast902231@gmail.com",
-//       userType: 1
-//     });
+describe("Testing POSTS SUCCESSFUL /user/create endpoint", () => {
+  it("creates user with email, password, username and usertype", async () => {
+    var randomNumber = Math.floor(Math.random() * 934823);
+    console.log(randomNumber);
+    const response = await request.post("/user/create").send({
+      username: "testing2",
+      password: "mrsexy",
+      email: `sexybeast${randomNumber}@gmail.com`,
+      userType: 1
+    });
 
-//     expect(response.status).to.eql(201);
-//   });
-// });
+    expect(response.status, "Very little chance but the account exist in the database already.\nRerun the test and it will pass").to.eql(201);
+  });
+});
 
 describe("Testing POSTS UNSUCCESSFUL /user/create endpoint", () => {
   it("registering with null fields", async () => {
@@ -60,7 +62,7 @@ describe("Testing POSTS UNSUCCESSFUL /user/create endpoint", () => {
     });
 
     expect(response.status).to.eql(401);
-    expect(response.body.message).to.eql("email already exists!");
+    expect(response.body.message, "You might have deleted the account that's being used for testing lol").to.eql("email already exists!");
   });
 
   it("registering with invalid email", async () => {

@@ -128,8 +128,8 @@ app.post("/user", (req, res) => {
         const password = req.body.password;
 
         if (!email || !password || emailRegex.test(email) == false) {
-          return res.sendStatus(400);
-        }
+            return res.status(400).send({ 'error' : "email is not valid!"});
+          }
 
         console.log(email, password);
 

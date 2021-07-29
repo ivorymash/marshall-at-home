@@ -16,7 +16,10 @@ describe("Testing GET SUCCESSFUL /students endpoint", () => {
     expect(response.status).to.eql(200);
     expect(body).to.be.an("array");
     expect(body.length).to.be.a("number");
-    expect(body[0 && 1]).to.include(
+    expect(
+      body[0 && 1],
+      "You might have changed the detials of these 2 accounts\nYou might have order your students where these 2 will be the last"
+    ).to.include(
       {
         id: 1,
         username: "salieri",
@@ -53,7 +56,10 @@ describe("Testing POST SUCCESSFUL /students/myStudents endpoint", () => {
     expect(response.status).to.eql(202);
     expect(body).to.be.an("array");
     expect(body.length).to.be.a("number");
-    expect(body[0 && 1]).to.include(
+    expect(
+      body[0 && 1],
+      "You might have changed the detials of these 2 accounts\nYou might have order your students where these 2 will be the last"
+    ).to.include(
       {
         id: 1,
         username: "salieri",

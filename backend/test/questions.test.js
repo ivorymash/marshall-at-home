@@ -7,6 +7,6 @@ describe("Testing GET SUCCESSFUL /questions endpoint", () => {
     const response = await request.get("/questions");
 
     expect(response.status).to.eql(200);
-    expect(response.body).to.not.be.null;
+    expect(response.body, "You fucked up your api call\nOr you might have deleted all you questions").to.not.be.null;
   });
 });

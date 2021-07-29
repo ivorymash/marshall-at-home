@@ -6,9 +6,9 @@ describe("Testing function verifyJWT()", () => {
     // ! DO NOT EDIT TOKEN
     const token =
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJjZTMwMTE2QGdtYWlsLmNvbSIsInVzZXJUeXBlIjoxLCJpYXQiOjE2Mjc0NTM1NTF9.dVNS0X7PSyLONjG_owUaEzd6ep-g1mihPk9v3bCcMgc";
-    const JWT = await app.verifyJWT(token);
+    const decoded = await app.verifyJWT(token);
 
-    expect(JWT).to.deep.equal({
+    expect(decoded, "You might have changed the user details").to.deep.equal({
       id: 3,
       email: "ce30116@gmail.com",
       userType: 1,
@@ -24,6 +24,6 @@ describe("Testing function generateAccessToken()", () => {
     const userType = 1;
     const token = await app.generateAccessToken(id, email, userType);
 
-    expect(token).to.be.a("string");
+    expect(token, "It has to be a string lol no choice").to.be.a("string");
   });
 });

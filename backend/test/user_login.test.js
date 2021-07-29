@@ -10,7 +10,9 @@ describe("Testing POSTS SUCCESSFUL /user endpoint", () => {
 
     const body = response.body;
     expect(response.status).to.eql(202);
-    expect(body.username).to.eql("testingSubjectUser");
+    expect(body.username, "You might have changed the username").to.eql(
+      "testingSubjectUser"
+    );
     expect(body.id).to.eql(67);
     expect(body.userType).to.eql(1);
   });
@@ -22,7 +24,9 @@ describe("Testing POSTS SUCCESSFUL /user endpoint", () => {
 
     const body = response.body;
     expect(response.status).to.eql(202);
-    expect(body.username).to.eql("testingSubjectAdmin");
+    expect(body.username, "You might have changed the username").to.eql(
+      "testingSubjectAdmin"
+    );
     expect(body.id).to.eql(68);
     expect(body.userType).to.eql(2);
   });

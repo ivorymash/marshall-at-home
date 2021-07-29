@@ -14,9 +14,9 @@ describe("Testing GET SUCCESSFUL /user/profile endpoint", () => {
 
     const body = response.body[0];
     expect(response.status).to.eql(200);
-    expect(body.username).to.eql("testingSubjectUser2");
-    expect(body.email).to.eql("testingsubjectUser2@gmail.com");
-    expect(body.profile_pic_link).to.eql("");
+    expect(body.username, "You might have changed your username").to.eql("testingSubjectUser2");
+    expect(body.email, "You might have changed your email").to.eql("testingsubjectUser2@gmail.com");
+    expect(body.profile_pic_link, "You might have updated a profile picture").to.eql("");
   });
 });
 

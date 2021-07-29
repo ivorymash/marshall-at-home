@@ -15,7 +15,10 @@ describe("Testing POST SUCCESSFUL /students/lecturer/update endpoint", () => {
 
     const result = response.body.result;
     expect(response.status).to.eql(202);
-    expect(result).to.eql("Added student 4");
+    expect(
+      result,
+      "You might have changed the response message in your html file"
+    ).to.eql("Added student 4");
   });
 
   it("remove student from lecturer with JWT(admin only)", async () => {
@@ -30,7 +33,10 @@ describe("Testing POST SUCCESSFUL /students/lecturer/update endpoint", () => {
 
     const result = response.body.result;
     expect(response.status).to.eql(202);
-    expect(result).to.eql("Removed student 4");
+    expect(
+      result,
+      "You might have changed the response message in your html file"
+    ).to.eql("Removed student 4");
   });
 });
 

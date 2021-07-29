@@ -9,7 +9,10 @@ describe("Testing POST SUCCESSFUL /article endpoint", () => {
     });
 
     expect(response.status).to.eql(200);
-    expect(response.body[0]).to.eql({
+    expect(
+      response.body[0],
+      "You might have removed it hence the failed test"
+    ).to.eql({
       id: 5,
       authorid: "1",
       videolink:
@@ -25,7 +28,10 @@ describe("Testing POST SUCCESSFUL /article endpoint", () => {
     });
 
     expect(response.status).to.eql(200);
-    expect(response.body[0]).to.eql({
+    expect(
+      response.body[0],
+      "You might have removed it hence the failed test"
+    ).to.eql({
       id: 7,
       authorid: "2",
       videolink: "https://www.youtube.com/watch?v=lz5yiVBtPvs",
@@ -37,14 +43,16 @@ describe("Testing POST SUCCESSFUL /article endpoint", () => {
 });
 
 describe("Testing POST UNSUCCESSFUL /article endpoint", () => {
-  it("retrieve empty contents of article", async () => {
-    const response = await request.post("/article");
+  it("retrieve empty contents of articles invalid id", async () => {
+    const response = await request.post("/article").send({
+      id: 918304913,
+    });;
 
     expect(response.status).to.eql(200);
     expect(response.body).to.eql([]).that.is.empty;
   });
 
-  it("retrieve empty contents of article", async () => {
+  it("retrieve empty contents of article that does not exist", async () => {
     const response = await request.post("/article");
 
     expect(response.status).to.eql(200);

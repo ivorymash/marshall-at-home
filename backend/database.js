@@ -137,6 +137,23 @@ class Database {
         })
     }
 
+    postIP(ip, callback){ //used for the IP checking inside of Marshalling@VR
+        this.pool
+        .query(`INSERT into ip_list(ip_address, creation_date) values($1, current_timestamp) ON CONFLICT (ip_address) DO UPDATE SET creation_date = current_timestamp`, [ip], (err,res) => {
+            if(err){return callback({'error':err,'results':null})}
+            return callback({'error':err, 'results': res.rows})
+        })
+    }
+
+    checkIP(ip, callback){ //used for the IP checking inside of Marshalling@VR.
+        this.pool
+        .query(`SELECT EXTRACT(EPOCH FROM current_timestamp-creation_date)/60 AS "AgeInMinutes", ip_address from ip_list
+        WHERE ip_address = $1`, [ip], (err,res) => {
+            if(err){return callback({'error':err,'results':null})}
+            return callback({'error':err, 'results': res.rows})
+        })
+    }
+
     // resetTables(callback) {
     //     this.pool
     //     .query('DELETE FROM customers; DELETE FROM companies', (err, res) => {

@@ -548,6 +548,53 @@ app.post("/quiz/submit", (req, res) => { //submit quiz results
 
 });
 
+//This one is to host the server IP thing, bad implementation. Hope we do better next time.
+
+// call this api when starting a game inside of VR.
+app.post("/server/ip", (req, res) => { 
+    const ip = req.body.ip;
+
+    db.postIP(ip, (result) => {
+        if (result.error != null) {
+            console.log("something went wrong");
+            console.log(result.error);
+            return res.sendStatus(400);
+        }
+        console.log(result);
+        return res.sendStatus(200);
+    })
+})
+
+//by right there should only be 1 string that has the ip.
+//by wrong we messed up, or the implementation was horribly done.
+
+// call this when checking IP in desktop mode.
+app.get("/server/ip", (req,res) => {
+    const ip = req.body.ip;
+
+    db.checkIP(ip, (result) => {
+        if (result.error != null) {
+            console.log("something went wrong");
+            console.log(result.error);
+            return res.sendStatus(400);
+        }
+        console.log(result);
+        //do checking stuff
+        if(result.results.length == 0){
+            res.status(401).send({"error" : "session doesnt exist"});
+        }else{
+            console.log(result.results[0].AgeInMinutes);
+            //check if the game was created less than 20 minutes ago, if so, we can assume that the ip is in use.
+            if(result.results[0].AgeInMinutes < 20){
+                res.status(200).send("LETS GO");
+            }
+            else{
+                res.status(401).send({"error" : "session probably already ended"});
+            }
+        }
+    })
+})
+
 
 /**
  * ========================== UTILS =========================

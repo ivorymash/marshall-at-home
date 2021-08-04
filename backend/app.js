@@ -569,7 +569,7 @@ app.post("/server/ip", (req, res) => {
 //by wrong we messed up, or the implementation was horribly done.
 
 // call this when checking IP in desktop mode.
-app.get("/server/ip", (req,res) => {
+app.post("/server/ip/check", (req,res) => {
     const ip = req.body.ip;
 
     db.checkIP(ip, (result) => {

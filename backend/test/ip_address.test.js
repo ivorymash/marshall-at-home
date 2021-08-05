@@ -41,7 +41,7 @@ describe("Testing POST UNSUCCESSFUL /server/ip endpoint", () => {
   });
 });
 
-describe("Testing POST UNSUCCESSFUL /server/ip.check endpoint", () => {
+describe("Testing POST UNSUCCESSFUL /server/ip/check endpoint", () => {
   it("session doesn't exist", async () => {
     const response = await request.post("/server/ip/check").send({
       ip: "123.123",

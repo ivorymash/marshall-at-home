@@ -3,7 +3,7 @@ const expect = require("chai").expect;
 const app = require("../app");
 
 describe("Testing POST SUCCESSFUL /article endpoint", () => {
-  it("retrieve contents of article", async () => {
+  it("retrieve contents of article(id 5)", async () => {
     const response = await request.post("/article").send({
       id: 5,
     });
@@ -22,7 +22,7 @@ describe("Testing POST SUCCESSFUL /article endpoint", () => {
     });
   });
 
-  it("retrieve contents of article", async () => {
+  it("retrieve contents of article(id 7)", async () => {
     const response = await request.post("/article").send({
       id: 7,
     });

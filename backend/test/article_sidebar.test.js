@@ -3,7 +3,7 @@ const expect = require("chai").expect;
 const app = require("../app");
 
 describe("Testing GET SUCCESSFUL /article/sidebar endpoint", () => {
-  it("retrieve contents of article", async () => {
+  it("retrieve contents of article as a sidebar", async () => {
     const response = await request.get("/article/sidebar");
 
     expect(response.status).to.eql(200);

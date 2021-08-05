@@ -554,15 +554,19 @@ app.post("/quiz/submit", (req, res) => { //submit quiz results
 app.post("/server/ip", (req, res) => { 
     const ip = req.body.ip;
 
+    if (ip === "") {
+        return res.sendStatus(400);
+    }
+
     db.postIP(ip, (result) => {
-        if (result.error != null) {
-            console.log("something went wrong");
-            console.log(result.error);
-            return res.sendStatus(400);
-        }
-        console.log(result);
-        return res.sendStatus(200);
-    })
+      if (result.error != null) {
+        console.log("something went wrong");
+        console.log(result.error);
+        return res.sendStatus(400);
+      }
+      console.log(result);
+      return res.sendStatus(200);
+    });
 })
 
 //by right there should only be 1 string that has the ip.
@@ -581,15 +585,15 @@ app.post("/server/ip/check", (req,res) => {
         console.log(result);
         //do checking stuff
         if(result.results.length == 0){
-            res.status(401).send({"error" : "session doesnt exist"});
+            res.status(401).json({error : "session doesnt exist"});
         }else{
             console.log(result.results[0].AgeInMinutes);
             //check if the game was created less than 20 minutes ago, if so, we can assume that the ip is in use.
             if(result.results[0].AgeInMinutes < 20){
-                res.status(200).send("LETS GO");
+                res.status(200).json({message: "LETS GO"});
             }
             else{
-                res.status(401).send({"error" : "session probably already ended"});
+                res.status(401).json({error : "session probably already ended"});
             }
         }
     })

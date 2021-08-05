@@ -51,6 +51,7 @@ describe("Testing POST UNSUCCESSFUL /server/ip/check endpoint", () => {
       response.status,
       "If this test fails, this IP address is probably in use."
     ).to.eql(401);
+    expect(response.body.error).to.eql("session doesnt exist");
   });
 
   it("session probably ended", async () => {
@@ -62,5 +63,6 @@ describe("Testing POST UNSUCCESSFUL /server/ip/check endpoint", () => {
       response.status,
       "Session is still fresh; lesser than 20 mins upon updating."
     ).to.eql(401);
+    expect(response.body.error).to.eql("session probably already ended");
   });
 });

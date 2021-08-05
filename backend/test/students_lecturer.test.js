@@ -2,7 +2,7 @@ const request = require("supertest")("http://localhost:3000");
 const expect = require("chai").expect;
 const app = require("../app");
 
-describe("Testing POST SUCCESSFUL /students/lecturer/update endpoint", () => {
+describe("Testing POST SUCCESSFUL /students/lecturer/** endpoint", () => {
   it("add new student to lecturer with JWT(admin only)", async () => {
     const response = await request
       .post("/students/lecturer/update")
@@ -40,7 +40,7 @@ describe("Testing POST SUCCESSFUL /students/lecturer/update endpoint", () => {
   });
 });
 
-describe("Testing POST UNSUCCESSFUL /students/lecturer/update endpoint", () => {
+describe("Testing POST UNSUCCESSFUL /students/lecturer/** endpoint", () => {
   it("add new student to lecturer without JWT", async () => {
     const response = await request
       .post("/students/lecturer/update")

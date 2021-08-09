@@ -6,24 +6,24 @@ function lecturerNavbar() {
    
   var navbar = document.getElementById("navbar"); 
  
-  fetch("http://localhost:3000/baka", { 
-    headers: { 
-      "Content-Type": "application/json", 
-      "Accept": "application/json", 
-      "authorization": `Bearer ${jwt}`, 
-    }, 
- 
-    method: "GET", 
-    // body: JSON.stringify({ id: id }), 
-  }) 
-    .then((res) => res.text()) 
-    .then((data) => { 
-      if (parseInt(data) === 2) { 
+  fetch("http://localhost:3000/topNav", {
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "authorization": `Bearer ${jwt}`,
+    },
+
+    method: "GET",
+    // body: JSON.stringify({ id: id }),
+  })
+    .then((res) => res.text())
+    .then((data) => {
+      if (parseInt(data) === 2) {
         navbar.innerHTML += `<li class="nav-item"> 
       <a class="nav-link" href="students.html">All Students</a> 
     </li><li class="nav-item"> 
     <a class="nav-link" href="mystudents.html">My Students</a> 
-  </li>`; //use this to deal with the lecturer stuff. 
-      } 
+  </li>`; //use this to deal with the lecturer stuff.
+      }
     }); 
 }

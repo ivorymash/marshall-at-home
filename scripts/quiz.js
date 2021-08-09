@@ -232,25 +232,30 @@ function verifyQnType2() {
 }
 
 function submitResults() {
-
-    userid = window.localStorage.getItem("id")??window.sessionStorage.getItem("id");
+    jwt =
+      window.localStorage.getItem("token") ??
+      window.sessionStorage.getItem("token");
 
     console.log(correctTally);
 
-    fetch('http://localhost:3000/quiz/submit'
-        , {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            method: "POST",
-            body: JSON.stringify({ userid: userid, totalQuestions: qnJson.length, correctQuestions: correctTally })
-        }
-    )
-        .then(res => {
-            console.log(res);
-            console.log("done submitting!");
-            window.location.replace("profile.html");
-        })
-        .catch(error => { alert(error) });
+    fetch("http://localhost:3000/quiz/submit", {
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "authorization": `Bearer ${jwt}`,
+      },
+      method: "POST",
+      body: JSON.stringify({
+        totalQuestions: qnJson.length,
+        correctQuestions: correctTally,
+      }),
+    })
+      .then((res) => {
+        console.log(res);
+        console.log("done submitting!");
+        window.location.replace("profile.html");
+      })
+      .catch((error) => {
+        alert(error);
+      });
 }

@@ -10,7 +10,7 @@ function signInMessage() {
 }
 
 function homeheaderStuff(username) {
-  document.getElementById("homeHeader").innerHTML = "whats good in the hood, " + username;
+  document.getElementById("homeHeader").innerHTML = "Welcome back, " + username +"!";
 }
 
 function loginBtn(isLoggedIn) {

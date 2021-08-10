@@ -61,11 +61,11 @@ function registerAccount() {
       body: JSON.stringify({ email: email, password: password, username: name, userType: userType })
     }).then(res => {
       if (res.status == "401") {
-        alert("something u fucked up");
+        alert("Something went wrong");
       }
 
       if (res.status == "201") {
-        console.log("dababy les go");
+        console.log("You are logged in");
         window.location.replace("index.html");
 
       }

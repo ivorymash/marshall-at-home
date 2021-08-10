@@ -3,9 +3,9 @@ const expect = require("chai").expect;
 const app = require("../app");
 
 describe("Testing POST SUCCESSFUL /article endpoint", () => {
-  it("retrieve contents of article(id 5)", async () => {
+  it("retrieve contents of article(id 20)", async () => {
     const response = await request.post("/article").send({
-      id: 5,
+      id: 20,
     });
 
     expect(response.status).to.eql(200);
@@ -13,18 +13,18 @@ describe("Testing POST SUCCESSFUL /article endpoint", () => {
       response.body[0],
       "You might have removed it hence the failed test"
     ).to.eql({
-      id: 5,
-      authorid: "1",
-      videolink:
-        "https://www.youtube.com/watch?v=F64yFFnZfkI&list=RDVkhEnvIy0yU&index=3",
-      title: "言って。",
-      content: "あのね, \n わたし \n ずっと実は \n 築いてるね",
+      id: 20,
+      authorid: "3",
+      videolink: "https://www.youtube.com/watch?v=CBdWeKrbtJo",
+      title: "Introduction to Airplane Marshalling",
+      content:
+        "Airplane Marshalling is is visual signalling between ground personnel and pilots on an airport, aircraft carrier or helipad. In this video you will look at an example of someone marshalling a Boeing-747-8F",
     });
   });
 
-  it("retrieve contents of article(id 7)", async () => {
+  it("retrieve contents of article(id 21)", async () => {
     const response = await request.post("/article").send({
-      id: 7,
+      id: 21,
     });
 
     expect(response.status).to.eql(200);
@@ -32,12 +32,13 @@ describe("Testing POST SUCCESSFUL /article endpoint", () => {
       response.body[0],
       "You might have removed it hence the failed test"
     ).to.eql({
-      id: 7,
-      authorid: "2",
-      videolink: "https://www.youtube.com/watch?v=lz5yiVBtPvs",
-      title: "Is Liking Anime a Sin?",
+      id: 21,
+      authorid: "3",
+      videolink:
+        "https://www.youtube.com/watch?v=7siioLHPigg&ab_channel=AirSafetyInstitute",
+      title: "Basic Marshalling Signals",
       content:
-        "Hey, vsauce here, \n is anime a sin? \n Not really lmao but here is a nhentai link have fun",
+        "In this video you will learn the basic marshalling signals that would need as a marshaller, or simply to brush up your knowledge. Checkout this video and taxi into your next FBO or fly-in with more confidence!",
     });
   });
 });
@@ -46,7 +47,7 @@ describe("Testing POST UNSUCCESSFUL /article endpoint", () => {
   it("retrieve empty contents of articles invalid id", async () => {
     const response = await request.post("/article").send({
       id: 918304913,
-    });;
+    });
 
     expect(response.status).to.eql(200);
     expect(response.body).to.eql([]).that.is.empty;

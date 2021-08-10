@@ -2,10 +2,10 @@ const request = require("supertest")("http://localhost:3000");
 const expect = require("chai").expect;
 const app = require("../app");
 
-describe("Testing GET SUCCESSFUL /baka", () => {
+describe("Testing GET SUCCESSFUL /topNav", () => {
   it("get userType with JWT(user)", async () => {
     const response = await request
-      .get("/baka")
+      .get("/topNav")
       // ! DO NOT EDIT TOKEN
       .set(
         "Authorization",
@@ -17,7 +17,7 @@ describe("Testing GET SUCCESSFUL /baka", () => {
 
   it("get userType with JWT(admin)", async () => {
     const response = await request
-      .get("/baka")
+      .get("/topNav")
       // ! DO NOT EDIT TOKEN
       .set(
         "Authorization",

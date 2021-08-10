@@ -17,18 +17,18 @@ describe("Testing GET SUCCESSFUL /students endpoint", () => {
     expect(body).to.be.an("array");
     expect(body.length).to.be.a("number");
     expect(
-      body[0 && 1],
+      body[1],
       "You might have changed the detials of these 2 accounts\nYou might have order your students where these 2 will be the last"
     ).to.include(
-      {
-        id: 1,
-        username: "salieri",
-        email: "steins@gate",
-        profile_pic_link:
-          "https://64.media.tumblr.com/830a8da8fd117b70cb7391c7a977ab91/tumblr_pfguhcEida1sx8ybdo6_400.png",
-        supervisor_id: 15,
-        lecturer_name: "annoying lecturer",
-      },
+      // {
+      //   id: 1,
+      //   username: "salieri",
+      //   email: "steins@gate",
+      //   profile_pic_link:
+      //     "https://64.media.tumblr.com/830a8da8fd117b70cb7391c7a977ab91/tumblr_pfguhcEida1sx8ybdo6_400.png",
+      //   supervisor_id: 15,
+      //   lecturer_name: "annoying lecturer",
+      // },
       {
         id: 3,
         username: "Jonny",
@@ -59,22 +59,13 @@ describe("Testing POST SUCCESSFUL /students/myStudents endpoint", () => {
     expect(
       body[0 && 1],
       "You might have changed the detials of these 2 accounts\nYou might have order your students where these 2 will be the last"
-    ).to.include(
-      {
-        id: 1,
-        username: "salieri",
-        email: "steins@gate",
-        profile_pic_link:
-          "https://64.media.tumblr.com/830a8da8fd117b70cb7391c7a977ab91/tumblr_pfguhcEida1sx8ybdo6_400.png",
-      },
-      {
-        id: 3,
-        username: "Jonny",
-        email: "ce30116@gmail.com",
-        profile_pic_link:
-          "https:images-na.ssl-images-amazon.com/images/I/518QdtLUH-L._AC_.jpg",
-      }
-    );
+    ).to.deep.include({
+      id: 3,
+      username: "Jonny",
+      email: "ce30116@gmail.com",
+      profile_pic_link:
+        "https:images-na.ssl-images-amazon.com/images/I/518QdtLUH-L._AC_.jpg",
+    });
   });
 });
 

@@ -9,14 +9,23 @@ describe("Testing GET SUCCESSFUL /user/profile endpoint", () => {
       // ! DO NOT EDIT TOKEN
       .set(
         "Authorization",
-        `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NjksImVtYWlsIjoidGVzdGluZ3N1YmplY3RVc2VyMkBnbWFpbC5jb20iLCJ1c2VyVHlwZSI6MSwiaWF0IjoxNjI3NDUwMDcxfQ.bxeOefWG7tBGiEvBG97ttmMcd0C0oUmg--rnFW30E04`
+        `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDMwLCJlbWFpbCI6IkplcmVteUxpbTk2QGljaGF0LnNwLmVkdS5zZyIsInVzZXJUeXBlIjoxLCJpYXQiOjE2Mjg1Mzg4ODh9.tclbiJGs-vsZkBN5K_B1FROoIIFgCWlojl88EoHRNsg`
       );
 
     const body = response.body[0];
     expect(response.status).to.eql(200);
-    expect(body.username, "You might have changed your username").to.eql("testingSubjectUser2");
-    expect(body.email, "You might have changed your email").to.eql("testingsubjectUser2@gmail.com");
-    expect(body.profile_pic_link, "You might have updated a profile picture").to.eql("");
+    expect(body.username, "You might have changed your username").to.eql(
+      "Jeremy"
+    );
+    expect(body.email, "You might have changed your email").to.eql(
+      "JeremyLim96@ichat.sp.edu.sg"
+    );
+    expect(
+      body.profile_pic_link,
+      "You might have updated a profile picture"
+    ).to.eql(
+      "https://static.billboard.com/files/media/jeremy-zucker-2018-billboard-1548-compressed.jpg"
+    );
   });
 });
 
@@ -27,18 +36,18 @@ describe("Testing PUT SUCCESSFUL /user/profile/update endpoint", () => {
       // ! DO NOT EDIT TOKEN
       .set(
         "Authorization",
-        `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NjksImVtYWlsIjoidGVzdGluZ3N1YmplY3RVc2VyMkBnbWFpbC5jb20iLCJ1c2VyVHlwZSI6MSwiaWF0IjoxNjI3NDUwMDcxfQ.bxeOefWG7tBGiEvBG97ttmMcd0C0oUmg--rnFW30E04`
+        `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDMwLCJlbWFpbCI6IkplcmVteUxpbTk2QGljaGF0LnNwLmVkdS5zZyIsInVzZXJUeXBlIjoxLCJpYXQiOjE2Mjg1Mzg4ODh9.tclbiJGs-vsZkBN5K_B1FROoIIFgCWlojl88EoHRNsg`
       )
       .send({
-        username: "testingSubjectUser22",
-        email: "testingsubjectUser2@gmail.com",
-        pfp: "",
+        username: "Jeremy2",
+        email: "JeremyLim96@ichat.sp.edu.sg",
+        pfp: "https://static.billboard.com/files/media/jeremy-zucker-2018-billboard-1548-compressed.jpg",
       });
 
     const body = response.body;
     expect(response.status).to.eql(202);
-    expect(body.username).to.eql("testingSubjectUser22");
-    expect(body.id).to.eql(69);
+    expect(body.username).to.eql("Jeremy2");
+    expect(body.id).to.eql(430);
   });
 
   it("update user email with JWT", async () => {
@@ -47,18 +56,18 @@ describe("Testing PUT SUCCESSFUL /user/profile/update endpoint", () => {
       // ! DO NOT EDIT TOKEN
       .set(
         "Authorization",
-        `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NjksImVtYWlsIjoidGVzdGluZ3N1YmplY3RVc2VyMkBnbWFpbC5jb20iLCJ1c2VyVHlwZSI6MSwiaWF0IjoxNjI3NDUwMDcxfQ.bxeOefWG7tBGiEvBG97ttmMcd0C0oUmg--rnFW30E04`
+        `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDMwLCJlbWFpbCI6IkplcmVteUxpbTk2QGljaGF0LnNwLmVkdS5zZyIsInVzZXJUeXBlIjoxLCJpYXQiOjE2Mjg1Mzg4ODh9.tclbiJGs-vsZkBN5K_B1FROoIIFgCWlojl88EoHRNsg`
       )
       .send({
-        username: "testingSubjectUser22",
-        email: "testingsubjectUser22@gmail.com",
-        pfp: "",
+        username: "Jeremy2",
+        email: "Jeremy2@gmail.com",
+        pfp: "https://static.billboard.com/files/media/jeremy-zucker-2018-billboard-1548-compressed.jpg",
       });
 
     const body = response.body;
     expect(response.status).to.eql(202);
-    expect(body.username).to.eql("testingSubjectUser22");
-    expect(body.id).to.eql(69);
+    expect(body.username).to.eql("Jeremy2");
+    expect(body.id).to.eql(430);
   });
 
   it("update user pfp with JWT", async () => {
@@ -67,18 +76,18 @@ describe("Testing PUT SUCCESSFUL /user/profile/update endpoint", () => {
       // ! DO NOT EDIT TOKEN
       .set(
         "Authorization",
-        `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NjksImVtYWlsIjoidGVzdGluZ3N1YmplY3RVc2VyMkBnbWFpbC5jb20iLCJ1c2VyVHlwZSI6MSwiaWF0IjoxNjI3NDUwMDcxfQ.bxeOefWG7tBGiEvBG97ttmMcd0C0oUmg--rnFW30E04`
+        `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDMwLCJlbWFpbCI6IkplcmVteUxpbTk2QGljaGF0LnNwLmVkdS5zZyIsInVzZXJUeXBlIjoxLCJpYXQiOjE2Mjg1Mzg4ODh9.tclbiJGs-vsZkBN5K_B1FROoIIFgCWlojl88EoHRNsg`
       )
       .send({
-        username: "testingSubjectUser22",
-        email: "testingsubjectUser22@gmail.com",
+        username: "Jeremy2",
+        email: "Jeremy2@gmail.com",
         pfp: "https://www.canr.msu.edu/contentAsset/image/9c8f1a21-90e3-486d-9ca0-dd4a7b4b439d/fileAsset/filter/Resize,Jpeg/resize_w/750/jpeg_q/80",
       });
 
     const body = response.body;
     expect(response.status).to.eql(202);
-    expect(body.username).to.eql("testingSubjectUser22");
-    expect(body.id).to.eql(69);
+    expect(body.username).to.eql("Jeremy2");
+    expect(body.id).to.eql(430);
   });
 
   it("update all user details with JWT", async () => {
@@ -87,18 +96,18 @@ describe("Testing PUT SUCCESSFUL /user/profile/update endpoint", () => {
       // ! DO NOT EDIT TOKEN
       .set(
         "Authorization",
-        `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NjksImVtYWlsIjoidGVzdGluZ3N1YmplY3RVc2VyMkBnbWFpbC5jb20iLCJ1c2VyVHlwZSI6MSwiaWF0IjoxNjI3NDUwMDcxfQ.bxeOefWG7tBGiEvBG97ttmMcd0C0oUmg--rnFW30E04`
+        `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDMwLCJlbWFpbCI6IkplcmVteUxpbTk2QGljaGF0LnNwLmVkdS5zZyIsInVzZXJUeXBlIjoxLCJpYXQiOjE2Mjg1Mzg4ODh9.tclbiJGs-vsZkBN5K_B1FROoIIFgCWlojl88EoHRNsg`
       )
       .send({
-        username: "testingSubjectUser2",
-        email: "testingsubjectUser2@gmail.com",
-        pfp: "",
+        username: "Jeremy",
+        email: "JeremyLim96@ichat.sp.edu.sg",
+        pfp: "https://static.billboard.com/files/media/jeremy-zucker-2018-billboard-1548-compressed.jpg",
       });
 
     const body = response.body;
     expect(response.status).to.eql(202);
-    expect(body.username).to.eql("testingSubjectUser2");
-    expect(body.id).to.eql(69);
+    expect(body.username).to.eql("Jeremy");
+    expect(body.id).to.eql(430);
   });
 });
 
@@ -113,9 +122,9 @@ describe("Testing GET UNSUCCESSFUL /user/profile/ endpoint", () => {
 describe("Testing PUT UNSUCCESSFUL /user/profile/update endpoint", () => {
   it("update user username without JWT", async () => {
     const response = await request.put("/user/profile/update").send({
-      username: "testingSubjectUser22",
-      email: "testingsubjectUser2@gmail.com",
-      pfp: "",
+      username: "Jeremy",
+      email: "JeremyLim96@ichat.sp.edu.sg",
+      pfp: "https://static.billboard.com/files/media/jeremy-zucker-2018-billboard-1548-compressed.jpg",
     });
 
     expect(response.status).to.eql(403);
@@ -123,9 +132,9 @@ describe("Testing PUT UNSUCCESSFUL /user/profile/update endpoint", () => {
 
   it("update user email without JWT", async () => {
     const response = await request.put("/user/profile/update").send({
-      username: "testingSubjectUser22",
-      email: "testingsubjectUser22@gmail.com",
-      pfp: "",
+      username: "Jeremy",
+      email: "Jeremy2@gmail.com",
+      pfp: "https://static.billboard.com/files/media/jeremy-zucker-2018-billboard-1548-compressed.jpg",
     });
 
     expect(response.status).to.eql(403);
@@ -133,8 +142,8 @@ describe("Testing PUT UNSUCCESSFUL /user/profile/update endpoint", () => {
 
   it("update user pfp without JWT", async () => {
     const response = await request.put("/user/profile/update").send({
-      username: "testingSubjectUser22",
-      email: "testingsubjectUser22@gmail.com",
+      username: "Jeremy",
+      email: "Jeremy2@gmail.com",
       pfp: "https://www.canr.msu.edu/contentAsset/image/9c8f1a21-90e3-486d-9ca0-dd4a7b4b439d/fileAsset/filter/Resize,Jpeg/resize_w/750/jpeg_q/80",
     });
 
@@ -149,7 +158,7 @@ describe("Testing GET SUCCESSFUL /user/profile/history endpoint", () => {
       // ! DO NOT EDIT TOKEN
       .set(
         "Authorization",
-        `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NjksImVtYWlsIjoidGVzdGluZ3N1YmplY3RVc2VyMkBnbWFpbC5jb20iLCJ1c2VyVHlwZSI6MSwiaWF0IjoxNjI3NDUwMDcxfQ.bxeOefWG7tBGiEvBG97ttmMcd0C0oUmg--rnFW30E04`
+        `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDMwLCJlbWFpbCI6IkplcmVteUxpbTk2QGljaGF0LnNwLmVkdS5zZyIsInVzZXJUeXBlIjoxLCJpYXQiOjE2Mjg1Mzg4ODh9.tclbiJGs-vsZkBN5K_B1FROoIIFgCWlojl88EoHRNsg`
       );
     const body = response.body;
     expect(response.status).to.eql(200);

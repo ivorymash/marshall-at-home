@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon server.js",
     "jest": "jest",
-    "test": "NODE_ENV=test mocha || mocha"
+    "test": "NODE_ENV=test mocha || mocha",
+    "cypress:open": "cypress open"
   },
   "author": "",
   "license": "ISC",
@@ -28,6 +29,7 @@
   "devDependencies": {
     "chai": "^4.3.4",
     "chai-http": "^4.3.0",
+    "cypress": "^8.2.0",
     "eslint": "^7.31.0",
     "jest": "^27.0.6",
     "mocha": "^9.0.3",

@@ -5,7 +5,7 @@ describe("Access learn page and learn knowledge", () => {
     cy.visit("/index.html");
   });
 
-  const email = "ce30116@gmail.com";
+  const email = "ce30116@ichat.sp.edu.sg";
   const password = "jon";
 
   it("go through learn page and return home", () => {

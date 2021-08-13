@@ -32,9 +32,9 @@ describe("Testing GET SUCCESSFUL /students endpoint", () => {
       {
         id: 3,
         username: "Jonny",
-        email: "ce30116@gmail.com",
+        email: "ce30116@ichat.sp.edu.sg",
         profile_pic_link:
-          "https:images-na.ssl-images-amazon.com/images/I/518QdtLUH-L._AC_.jpg",
+          "https://i.pinimg.com/originals/96/d4/5d/96d45d18c5237f06b79a6a4e6452a510.png",
         supervisor_id: 15,
         lecturer_name: "annoying lecturer",
       }
@@ -62,9 +62,9 @@ describe("Testing POST SUCCESSFUL /students/myStudents endpoint", () => {
     ).to.deep.include({
       id: 3,
       username: "Jonny",
-      email: "ce30116@gmail.com",
+      email: "ce30116@ichat.sp.edu.sg",
       profile_pic_link:
-        "https:images-na.ssl-images-amazon.com/images/I/518QdtLUH-L._AC_.jpg",
+        "https://i.pinimg.com/originals/96/d4/5d/96d45d18c5237f06b79a6a4e6452a510.png",
     });
   });
 });
